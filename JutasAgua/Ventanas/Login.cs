@@ -15,6 +15,9 @@ namespace JutasAgua
     {
         RepositoryAgua repository = new RepositoryAgua();
         PagPrincipal pagPrincipal;
+
+        public static string user;
+        public static string password;
        
         public Login()
         {
@@ -25,6 +28,8 @@ namespace JutasAgua
         {
             string user = txtUser.Text;
             string password = txtPassword.Text;
+            Login.user = txtUser.Text;
+            Login.password = txtPassword.Text;
 
             try
             {

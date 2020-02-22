@@ -93,11 +93,6 @@ namespace JutasAgua.Ventanas
         private empresa ObtenerEmpresas()
         {
             empresa empresa = new empresa();
-
-            empresa.ccd = Convert.ToDateTime(lblccd.Text);
-            empresa.cci = Convert.ToInt32(lblcci.Text);
-            empresa.cwd = Convert.ToDateTime(lblcwd.Text);
-            empresa.cwi = Convert.ToInt32(lblcwi.Text);
             empresa.direccion = txtDirecc.Text;
             empresa.email = txtEmail.Text;
             empresa.id = Convert.ToInt32(lblId.Text);
@@ -107,6 +102,12 @@ namespace JutasAgua.Ventanas
             empresa.ruc = txtRuc.Text;
             empresa.telefono_fijo = txtTelefonoFijo.Text;
             empresa.telefono_movil = txtTelefonoCel.Text;
+
+            List<usuario> usuario = repository.hacerLogin(Login.user, Login.password);
+            empresa.ccd = DateTime.Now;
+            empresa.cci = usuario[0].id;
+            empresa.cwd = DateTime.Now;
+            empresa.cwi = usuario[0].id;
 
             return empresa;
 
@@ -121,7 +122,8 @@ namespace JutasAgua.Ventanas
         {
             try
             {
-                var updateEmpresa = ObtenerEmpresas();
+                empresa updateEmpresa = ObtenerEmpresas();
+
 
                 var isModfy = repository.ModificarEmpresa(updateEmpresa);
 
