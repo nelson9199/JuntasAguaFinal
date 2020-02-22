@@ -37,6 +37,30 @@ namespace Modelos
             }
         }
 
+        public bool ModificarEmpresa(empresa nuevaEmpresa)
+        {
+            using (var contexto = new juntas_aguaEntities())
+            {
+                empresa updateEmpresa = contexto.empresa.First(p => p.id == nuevaEmpresa.id);
+
+                updateEmpresa.nombre = nuevaEmpresa.nombre;
+                updateEmpresa.logo = nuevaEmpresa.logo;
+                updateEmpresa.recaudador = nuevaEmpresa.recaudador;
+                updateEmpresa.ruc = nuevaEmpresa.ruc;
+                updateEmpresa.telefono_fijo = nuevaEmpresa.telefono_fijo;
+                updateEmpresa.telefono_movil = nuevaEmpresa.telefono_movil;
+                updateEmpresa.email = nuevaEmpresa.email;
+                updateEmpresa.direccion = nuevaEmpresa.direccion;
+                updateEmpresa.cwi = nuevaEmpresa.cwi;
+                updateEmpresa.cwd = nuevaEmpresa.cwd;
+                updateEmpresa.cci = nuevaEmpresa.cci;
+                updateEmpresa.ccd = nuevaEmpresa.ccd;
+
+                int affected = contexto.SaveChanges();
+                return (affected == 1);
+            }
+        }
+
         //Tabla tarifa
         public List<tarifa>OtenerTarifas()
         {
