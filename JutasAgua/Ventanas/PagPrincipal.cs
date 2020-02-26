@@ -39,6 +39,7 @@ namespace JutasAgua.Ventanas
                 formEmpresas.MdiParent = this;
                 formEmpresas.FormClosed += new FormClosedEventHandler(CerrarFormaEmpresas);
                 formEmpresas.Show();
+                formEmpresas.WindowState = FormWindowState.Maximized;
             }
             else
             {
@@ -60,6 +61,8 @@ namespace JutasAgua.Ventanas
                 formClientes.MdiParent = this;
                 formClientes.FormClosed += new FormClosedEventHandler(CerrarFormaClientes);
                 formClientes.Show();
+                formClientes.WindowState = FormWindowState.Maximized;
+
             }
             else
             {

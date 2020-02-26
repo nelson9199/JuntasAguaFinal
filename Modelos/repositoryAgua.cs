@@ -13,7 +13,7 @@ namespace Modelos
         //Tabla usuario
         public List<usuario> hacerLogin(string user, string clave)
         {
-            using(var contexto = new ipwebec_hydrosEntities())
+            using (var contexto = new ipwebec_hydrosEntities())
             {
                 var usuario =
                     from c in contexto.usuario
@@ -31,7 +31,7 @@ namespace Modelos
             {
                 var empresa =
                     from e in contexto.empresa
-                    select e; 
+                    select e;
 
                 return empresa.ToList();
             }
@@ -63,7 +63,7 @@ namespace Modelos
         }
 
         //Tabla tarifa
-        public List<tarifa>OtenerTarifas()
+        public List<tarifa> OtenerTarifas()
         {
             using (var contexto = new ipwebec_hydrosEntities())
             {
@@ -117,13 +117,24 @@ namespace Modelos
             }
         }
 
+        public bool InsertarCliente(cliente nuevoCliente)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                contexto.cliente.Add(nuevoCliente);
+
+                int affected = contexto.SaveChanges();
+                return (affected == 1);
+            }
+        }
+
         //tabla medidores
         public List<ConsultaMedidores> ObtenerMedidioresPorId(int numCli)
         {
-  
+
             using (var contexto = new ipwebec_hydrosEntities())
             {
-       
+
                 var usuario =
                     from m in contexto.medidor
                     join b in contexto.barrio
@@ -141,6 +152,7 @@ namespace Modelos
                         lectura_inicial = m.lectura_inicial,
                         estado = m.estado
                     };
+
 
                 return usuario.ToList();
             }

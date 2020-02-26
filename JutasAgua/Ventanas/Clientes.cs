@@ -52,14 +52,51 @@ namespace JutasAgua.Ventanas
             try
             {
 
-                var empresa = repository.OtenerClientes();
+                var clientes = repository.OtenerClientes();
 
-                dataGridClientes.DataSource = empresa;
+                for (int i = 0; i < clientes.Count; i++)
+                {
+                    switch (clientes[i].tipo_identificacion)
+                    {
+                        case "C":
+                            clientes[i].tipo_identificacion = "CÈDULA";
+                            break;
+                        case "P":
+                            clientes[i].tipo_identificacion = "PASAPORTE";
+                            break;
+                        case "R":
+                            clientes[i].tipo_identificacion = "RUC";
+                            break;
+
+                    }
+
+                    switch (clientes[i].sexo)
+                    {
+                        case "F":
+                            clientes[i].sexo = "Femenino";
+                            break;
+                        case "M":
+                            clientes[i].sexo = "Masculino";
+                            break;
+                    }
+
+                    switch (clientes[i].estado)
+                    {
+                        case "A":
+                            clientes[i].estado = "Activo";
+                            break;
+                        case "I":
+                            clientes[i].sexo = "Inactivo";
+                            break;
+                    }
+                }
+
+                dataGridClientes.DataSource = clientes;
 
                 dataGridClientes.Columns[1].Visible = false;
                 dataGridClientes.Columns[2].HeaderText = "Nombre";
                 dataGridClientes.Columns[3].HeaderText = "Apellido";
-                dataGridClientes.Columns[4].HeaderText = "Fecha Nacimiento"; 
+                dataGridClientes.Columns[4].HeaderText = "Fecha Nacimiento";
                 dataGridClientes.Columns[5].HeaderText = "Tipo Identificación";
                 dataGridClientes.Columns[6].HeaderText = "Número Identificacíon";
                 dataGridClientes.Columns[7].HeaderText = "Dirección";
@@ -158,6 +195,27 @@ namespace JutasAgua.Ventanas
 
         }
 
+        private cliente ObtenerDatosDelGridInsert()
+        {
+            cliente cliente = new cliente();
+
+            cliente.apellido = txtApellidos.Text;
+            cliente.direccion = txtDireccion.Text;
+            cliente.email = txtEmail.Text;
+            cliente.estado = dropEstado.Text;
+            cliente.fecha_nacimiento = dateFecNac.Value;
+            cliente.foto = lblFoto.Text;
+            cliente.nombre = txtNombCli.Text;
+            cliente.numero_identificacion = txtNumIden.Text;
+            cliente.sexo = dropSexo.Text;
+            cliente.telefono_celular = txtCelular.Text;
+            cliente.telefono_fijo = txtTeleFijo.Text;
+            cliente.tipo_identificacion = dropTipoIdenti.Text;
+
+            return cliente;
+
+        }
+
         private void btnGuardarCambios_Click(object sender, EventArgs e)
         {
             var updatedCliente = ObtenerDatosDelGrid();
@@ -181,10 +239,101 @@ namespace JutasAgua.Ventanas
                     MessageBox.Show("No se han podido modificar datos");
                 }
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            //Validaciones de formulario
+            if (txtNombCli.Text == "")
+            {
+                errorProvider1.SetError(txtNombCli, "Debe llenar este campo");
+            }
+            if (txtApellidos.Text == "")
+            {
+                errorProvider1.SetError(txtApellidos, "Debe llenar este campo");
+            }
+            if (txtNumIden.Text == "")
+            {
+                errorProvider1.SetError(txtNumIden, "Debe llenar este campo");
+            }
+            if (dropTipoIdenti.Text == null)
+            {
+                errorProvider1.SetError(dropTipoIdenti, "Debe escoger un tipo de Identificacìon");
+
+            }
+            if (txtNombCli.Text == null || txtApellidos.Text == null || txtNumIden.Text == null || dropTipoIdenti.Text == null)
+            {
+                return;
+            }
+
+            try
+            {
+                var cliente = ObtenerDatosDelGridInsert();
+                List<usuario> usuario = repository.hacerLogin(Login.user, Login.password);
+                cliente.cci = usuario[0].id;
+                cliente.ccd = DateTime.Now;
+
+                switch (cliente.tipo_identificacion)
+                {
+                    case "CÉDULA":
+                        cliente.tipo_identificacion = "C";
+                        break;
+                    case "PASAPORTE":
+                        cliente.tipo_identificacion = "P";
+                        break;
+                    case "RUC":
+                        cliente.tipo_identificacion = "R";
+                        break;
+                }
+
+                switch (cliente.sexo)
+                {
+                    case "FEMENINO":
+                        cliente.sexo = "F";
+                        break;
+                    case "MASCULINO":
+                        cliente.sexo = "M";
+                        break;
+                }
+
+                switch (cliente.estado)
+                {
+                    case "ACTIVO":
+                        cliente.estado = "A";
+                        break;
+                    case "INACTIVO":
+                        cliente.estado = "I";
+                        break;
+                }
+
+                var isOk = repository.InsertarCliente(cliente);
+
+                if (isOk)
+                {
+                    MessageBox.Show("Cliente Guardado con Èxito");
+                    panelClientes.Visible = false;
+                    Mostrar();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudieron guardar los datos");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void txtNombCli_TextChange(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(txtNombCli, "");
         }
     }
 

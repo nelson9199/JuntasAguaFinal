@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -125,11 +126,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtNombCli = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridClientes)).BeginInit();
             this.panel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelClientes.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridClientes
@@ -839,6 +842,7 @@
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnGuardar.TextMarginLeft = 0;
             this.btnGuardar.UseDefaultRadiusAndThickness = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // dropEstado
             // 
@@ -1575,6 +1579,7 @@
             this.txtNombCli.TextPlaceholder = "";
             this.txtNombCli.UseSystemPasswordChar = false;
             this.txtNombCli.WordWrap = true;
+            this.txtNombCli.TextChange += new System.EventHandler(this.txtNombCli_TextChange);
             // 
             // label2
             // 
@@ -1585,6 +1590,10 @@
             this.label2.Size = new System.Drawing.Size(71, 21);
             this.label2.TabIndex = 1;
             this.label2.Text = "Nombre:";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // Clientes
             // 
@@ -1607,6 +1616,7 @@
             this.panelClientes.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1656,5 +1666,6 @@
         private System.Windows.Forms.Label lblccd;
         private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox txtApellidos;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
