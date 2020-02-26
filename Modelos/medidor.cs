@@ -26,7 +26,7 @@ namespace Modelos
         public int barrio_id { get; set; }
         public int tarifa_id { get; set; }
         public int marca_id { get; set; }
-        public string nombre { get; set; }
+        public string nombreM { get; set; }
         public string serie { get; set; }
         public string lectura_inicial { get; set; }
         public string estado { get; set; }

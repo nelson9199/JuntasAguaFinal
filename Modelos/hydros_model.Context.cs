@@ -13,10 +13,10 @@ namespace Modelos
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class juntas_aguaEntities : DbContext
+    public partial class ipwebec_hydrosEntities : DbContext
     {
-        public juntas_aguaEntities()
-            : base("name=juntas_aguaEntities")
+        public ipwebec_hydrosEntities()
+            : base("name=ipwebec_hydrosEntities")
         {
         }
     

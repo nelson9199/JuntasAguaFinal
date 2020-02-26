@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="842329ce55be41c59f2d8af28ce99fae" Name="Diagram1">
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.actividad" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.articulo" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.asistencia" Width="1.5" PointX="8.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.barrio" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.categoria_menu" Width="1.5" PointX="4.5" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.cliente" Width="1.5" PointX="0.75" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.costo_tarifa" Width="1.5" PointX="6" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.detalle_asistencia" Width="1.5" PointX="10.5" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.detalle_ingreso" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.detalle_kardex" Width="1.5" PointX="7.5" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.detalle_venta" Width="1.5" PointX="5.25" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.empleado" Width="1.5" PointX="7.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.empresa" Width="1.5" PointX="8.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.forma_pago" Width="1.5" PointX="0.75" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.grupo" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.impuesto" Width="1.5" PointX="0.75" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.ingreso" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.kardex" Width="1.5" PointX="5.25" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.lectura" Width="1.5" PointX="8.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.marca" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.medidor" Width="1.5" PointX="6" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.menu" Width="1.5" PointX="6.75" PointY="43.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.mes" Width="1.5" PointX="6" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.multa_retraso" Width="1.5" PointX="9.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.perfil" Width="1.5" PointX="3.75" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.perfil_menu" Width="1.5" PointX="9" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.proveedor" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.tarifa" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.tipo_comprobante" Width="1.5" PointX="0.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.ubicacion" Width="1.5" PointX="0.75" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.unidad_medida" Width="1.5" PointX="0.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.usuario" Width="1.5" PointX="6" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ipwebec_hydrosModel.venta" Width="1.5" PointX="3" PointY="30.875" IsExpanded="true" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_asistencias_actividades1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_articulo_grupo1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_articulo_impuesto1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_articulo_marca1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_articulos_unidades_medidas1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_asistencia_articulo1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_detalle_facturas_productos1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_detalles_ingresos_articulos1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_kardex_articulo1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_lectura_articulo1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_asistencia_barrio1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_detalles_asistencias_asistencias1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_medidor_barrio1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_menu_categoria_menu1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_facturas_clientes1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_medidor_cliente1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_costo_tarifa_tarifa1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_detalle_asistencia_detalle_venta1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_detalle_asistencia_medidor1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_detalles_ingresos_ingresos1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_detalle_kardex_kardex1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_detalle_venta_venta1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_lectura_detalle_venta1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_venta_forma_pago1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_ingreso_tipo_comprobante1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_ingreso_ubicacion1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_ingresos_proveedores1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_lectura_medidor1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_lectura_mes1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_lectura_usuario1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_medidor_marca1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_medidor_tarifa2" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_perfil_menu_menu1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_perfil_menu_perfil1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.fk_venta_tipo_comprobante1" ManuallyRouted="false" />
+        <AssociationConnector Association="ipwebec_hydrosModel.usuario_perfil" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

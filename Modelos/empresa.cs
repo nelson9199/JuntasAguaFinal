@@ -23,6 +23,7 @@ namespace Modelos
         public string telefono_movil { get; set; }
         public string recaudador { get; set; }
         public string ruc { get; set; }
+        public string facturacion { get; set; }
         public Nullable<int> cci { get; set; }
         public Nullable<System.DateTime> ccd { get; set; }
         public Nullable<int> cwi { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="juntas_aguaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ipwebec_hydrosModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="actividad">
           <Key>
             <PropertyRef Name="id" />
@@ -67,7 +67,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="nombreB" Type="varchar" MaxLength="100" />
           <Property Name="cci" Type="int" />
           <Property Name="ccd" Type="varchar" MaxLength="45" />
           <Property Name="cwi" Type="int" />
@@ -211,6 +211,7 @@
           <Property Name="telefono_movil" Type="varchar" MaxLength="10" />
           <Property Name="recaudador" Type="varchar" MaxLength="100" />
           <Property Name="ruc" Type="varchar" MaxLength="15" />
+          <Property Name="facturacion" Type="enum" />
           <Property Name="cci" Type="int" />
           <Property Name="ccd" Type="datetime" Precision="0" />
           <Property Name="cwi" Type="int" />
@@ -311,7 +312,7 @@
           <Property Name="barrio_id" Type="int" Nullable="false" />
           <Property Name="tarifa_id" Type="int" Nullable="false" />
           <Property Name="marca_id" Type="int" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="45" />
+          <Property Name="nombreM" Type="varchar" MaxLength="45" />
           <Property Name="serie" Type="varchar" MaxLength="45" />
           <Property Name="lectura_inicial" Type="varchar" MaxLength="45" />
           <Property Name="estado" Type="enum" />
@@ -395,7 +396,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="orden" Type="int" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="nombreT" Type="varchar" MaxLength="100" />
           <Property Name="descripcion" Type="text" />
           <Property Name="cci" Type="int" />
           <Property Name="ccd" Type="datetime" Precision="0" />
@@ -922,41 +923,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="juntas_aguaModelStoreContainer">
-          <EntitySet Name="actividad" EntityType="Self.actividad" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="articulo" EntityType="Self.articulo" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="asistencia" EntityType="Self.asistencia" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="barrio" EntityType="Self.barrio" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="categoria_menu" EntityType="Self.categoria_menu" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="costo_tarifa" EntityType="Self.costo_tarifa" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="detalle_asistencia" EntityType="Self.detalle_asistencia" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="detalle_ingreso" EntityType="Self.detalle_ingreso" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="detalle_kardex" EntityType="Self.detalle_kardex" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="detalle_venta" EntityType="Self.detalle_venta" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="empleado" EntityType="Self.empleado" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="empresa" EntityType="Self.empresa" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="forma_pago" EntityType="Self.forma_pago" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="grupo" EntityType="Self.grupo" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="impuesto" EntityType="Self.impuesto" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="ingreso" EntityType="Self.ingreso" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="kardex" EntityType="Self.kardex" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="lectura" EntityType="Self.lectura" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="marca" EntityType="Self.marca" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="medidor" EntityType="Self.medidor" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="menu" EntityType="Self.menu" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="mes" EntityType="Self.mes" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="multa_retraso" EntityType="Self.multa_retraso" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="perfil" EntityType="Self.perfil" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="perfil_menu" EntityType="Self.perfil_menu" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="tarifa" EntityType="Self.tarifa" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="tipo_comprobante" EntityType="Self.tipo_comprobante" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="ubicacion" EntityType="Self.ubicacion" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="unidad_medida" EntityType="Self.unidad_medida" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="usuario_perfil" EntityType="Self.usuario_perfil" Schema="juntas_agua" store:Type="Tables" />
-          <EntitySet Name="venta" EntityType="Self.venta" Schema="juntas_agua" store:Type="Tables" />
+        <EntityContainer Name="ipwebec_hydrosModelStoreContainer">
+          <EntitySet Name="actividad" EntityType="Self.actividad" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="articulo" EntityType="Self.articulo" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="asistencia" EntityType="Self.asistencia" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="barrio" EntityType="Self.barrio" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="categoria_menu" EntityType="Self.categoria_menu" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="costo_tarifa" EntityType="Self.costo_tarifa" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="detalle_asistencia" EntityType="Self.detalle_asistencia" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="detalle_ingreso" EntityType="Self.detalle_ingreso" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="detalle_kardex" EntityType="Self.detalle_kardex" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="detalle_venta" EntityType="Self.detalle_venta" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="empleado" EntityType="Self.empleado" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="empresa" EntityType="Self.empresa" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="forma_pago" EntityType="Self.forma_pago" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="grupo" EntityType="Self.grupo" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="impuesto" EntityType="Self.impuesto" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="ingreso" EntityType="Self.ingreso" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="kardex" EntityType="Self.kardex" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="lectura" EntityType="Self.lectura" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="marca" EntityType="Self.marca" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="medidor" EntityType="Self.medidor" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="menu" EntityType="Self.menu" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="mes" EntityType="Self.mes" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="multa_retraso" EntityType="Self.multa_retraso" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="perfil" EntityType="Self.perfil" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="perfil_menu" EntityType="Self.perfil_menu" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="tarifa" EntityType="Self.tarifa" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="tipo_comprobante" EntityType="Self.tipo_comprobante" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="ubicacion" EntityType="Self.ubicacion" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="unidad_medida" EntityType="Self.unidad_medida" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="usuario_perfil" EntityType="Self.usuario_perfil" Schema="ipwebec_hydros" store:Type="Tables" />
+          <EntitySet Name="venta" EntityType="Self.venta" Schema="ipwebec_hydros" store:Type="Tables" />
           <AssociationSet Name="fk_articulo_grupo1" Association="Self.fk_articulo_grupo1">
             <End Role="grupo" EntitySet="grupo" />
             <End Role="articulo" EntitySet="articulo" />
@@ -1110,7 +1111,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="juntas_aguaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ipwebec_hydrosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="actividad">
           <Key>
             <PropertyRef Name="id" />
@@ -1187,7 +1188,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombreB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="cci" Type="Int32" />
           <Property Name="ccd" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="cwi" Type="Int32" />
@@ -1347,6 +1348,7 @@
           <Property Name="telefono_movil" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="recaudador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ruc" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="facturacion" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Name="cci" Type="Int32" />
           <Property Name="ccd" Type="DateTime" />
           <Property Name="cwi" Type="Int32" />
@@ -1463,7 +1465,7 @@
           <Property Name="barrio_id" Type="Int32" Nullable="false" />
           <Property Name="tarifa_id" Type="Int32" Nullable="false" />
           <Property Name="marca_id" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nombreM" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="serie" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="lectura_inicial" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
@@ -1561,7 +1563,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="orden" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombreT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="descripcion" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="cci" Type="Int32" />
           <Property Name="ccd" Type="DateTime" />
@@ -2072,7 +2074,7 @@
           <End Role="perfil" Type="Self.perfil" Multiplicity="*" />
           <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="juntas_aguaEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ipwebec_hydrosEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="actividad" EntityType="Self.actividad" />
           <EntitySet Name="articulo" EntityType="Self.articulo" />
           <EntitySet Name="asistencia" EntityType="Self.asistencia" />
@@ -2256,9 +2258,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="juntas_aguaModelStoreContainer" CdmEntityContainer="juntas_aguaEntities">
+        <EntityContainerMapping StorageEntityContainer="ipwebec_hydrosModelStoreContainer" CdmEntityContainer="ipwebec_hydrosEntities">
           <EntitySetMapping Name="actividad">
-            <EntityTypeMapping TypeName="juntas_aguaModel.actividad">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.actividad">
               <MappingFragment StoreEntitySet="actividad">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2266,7 +2268,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="articulo">
-            <EntityTypeMapping TypeName="juntas_aguaModel.articulo">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.articulo">
               <MappingFragment StoreEntitySet="articulo">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="grupo_id" ColumnName="grupo_id" />
@@ -2301,7 +2303,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="asistencia">
-            <EntityTypeMapping TypeName="juntas_aguaModel.asistencia">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.asistencia">
               <MappingFragment StoreEntitySet="asistencia">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="actividad_id" ColumnName="actividad_id" />
@@ -2318,10 +2320,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="barrio">
-            <EntityTypeMapping TypeName="juntas_aguaModel.barrio">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.barrio">
               <MappingFragment StoreEntitySet="barrio">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nombreB" ColumnName="nombreB" />
                 <ScalarProperty Name="cci" ColumnName="cci" />
                 <ScalarProperty Name="ccd" ColumnName="ccd" />
                 <ScalarProperty Name="cwi" ColumnName="cwi" />
@@ -2330,7 +2332,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="categoria_menu">
-            <EntityTypeMapping TypeName="juntas_aguaModel.categoria_menu">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.categoria_menu">
               <MappingFragment StoreEntitySet="categoria_menu">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2340,7 +2342,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="cliente">
-            <EntityTypeMapping TypeName="juntas_aguaModel.cliente">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.cliente">
               <MappingFragment StoreEntitySet="cliente">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2363,7 +2365,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="costo_tarifa">
-            <EntityTypeMapping TypeName="juntas_aguaModel.costo_tarifa">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.costo_tarifa">
               <MappingFragment StoreEntitySet="costo_tarifa">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tarifa_id" ColumnName="tarifa_id" />
@@ -2382,7 +2384,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="detalle_asistencia">
-            <EntityTypeMapping TypeName="juntas_aguaModel.detalle_asistencia">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.detalle_asistencia">
               <MappingFragment StoreEntitySet="detalle_asistencia">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="asistencia_id" ColumnName="asistencia_id" />
@@ -2398,7 +2400,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="detalle_ingreso">
-            <EntityTypeMapping TypeName="juntas_aguaModel.detalle_ingreso">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.detalle_ingreso">
               <MappingFragment StoreEntitySet="detalle_ingreso">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="ingreso_id" ColumnName="ingreso_id" />
@@ -2411,7 +2413,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="detalle_kardex">
-            <EntityTypeMapping TypeName="juntas_aguaModel.detalle_kardex">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.detalle_kardex">
               <MappingFragment StoreEntitySet="detalle_kardex">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="kardex_id" ColumnName="kardex_id" />
@@ -2432,7 +2434,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="detalle_venta">
-            <EntityTypeMapping TypeName="juntas_aguaModel.detalle_venta">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.detalle_venta">
               <MappingFragment StoreEntitySet="detalle_venta">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="venta_id" ColumnName="venta_id" />
@@ -2446,7 +2448,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="empleado">
-            <EntityTypeMapping TypeName="juntas_aguaModel.empleado">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.empleado">
               <MappingFragment StoreEntitySet="empleado">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2463,7 +2465,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="empresa">
-            <EntityTypeMapping TypeName="juntas_aguaModel.empresa">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.empresa">
               <MappingFragment StoreEntitySet="empresa">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2474,6 +2476,7 @@
                 <ScalarProperty Name="telefono_movil" ColumnName="telefono_movil" />
                 <ScalarProperty Name="recaudador" ColumnName="recaudador" />
                 <ScalarProperty Name="ruc" ColumnName="ruc" />
+                <ScalarProperty Name="facturacion" ColumnName="facturacion" />
                 <ScalarProperty Name="cci" ColumnName="cci" />
                 <ScalarProperty Name="ccd" ColumnName="ccd" />
                 <ScalarProperty Name="cwi" ColumnName="cwi" />
@@ -2482,7 +2485,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="forma_pago">
-            <EntityTypeMapping TypeName="juntas_aguaModel.forma_pago">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.forma_pago">
               <MappingFragment StoreEntitySet="forma_pago">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="orden" ColumnName="orden" />
@@ -2492,7 +2495,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="grupo">
-            <EntityTypeMapping TypeName="juntas_aguaModel.grupo">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.grupo">
               <MappingFragment StoreEntitySet="grupo">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2501,7 +2504,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="impuesto">
-            <EntityTypeMapping TypeName="juntas_aguaModel.impuesto">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.impuesto">
               <MappingFragment StoreEntitySet="impuesto">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2510,7 +2513,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ingreso">
-            <EntityTypeMapping TypeName="juntas_aguaModel.ingreso">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.ingreso">
               <MappingFragment StoreEntitySet="ingreso">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="ubicacion_id" ColumnName="ubicacion_id" />
@@ -2524,7 +2527,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="kardex">
-            <EntityTypeMapping TypeName="juntas_aguaModel.kardex">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.kardex">
               <MappingFragment StoreEntitySet="kardex">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="articulo_id" ColumnName="articulo_id" />
@@ -2538,7 +2541,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="lectura">
-            <EntityTypeMapping TypeName="juntas_aguaModel.lectura">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.lectura">
               <MappingFragment StoreEntitySet="lectura">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="medidor_id" ColumnName="medidor_id" />
@@ -2567,7 +2570,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="marca">
-            <EntityTypeMapping TypeName="juntas_aguaModel.marca">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.marca">
               <MappingFragment StoreEntitySet="marca">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2575,14 +2578,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="medidor">
-            <EntityTypeMapping TypeName="juntas_aguaModel.medidor">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.medidor">
               <MappingFragment StoreEntitySet="medidor">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
                 <ScalarProperty Name="barrio_id" ColumnName="barrio_id" />
                 <ScalarProperty Name="tarifa_id" ColumnName="tarifa_id" />
                 <ScalarProperty Name="marca_id" ColumnName="marca_id" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nombreM" ColumnName="nombreM" />
                 <ScalarProperty Name="serie" ColumnName="serie" />
                 <ScalarProperty Name="lectura_inicial" ColumnName="lectura_inicial" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
@@ -2596,7 +2599,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="menu">
-            <EntityTypeMapping TypeName="juntas_aguaModel.menu">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.menu">
               <MappingFragment StoreEntitySet="menu">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="categoria_menu_id" ColumnName="categoria_menu_id" />
@@ -2608,7 +2611,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="mes">
-            <EntityTypeMapping TypeName="juntas_aguaModel.mes">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.mes">
               <MappingFragment StoreEntitySet="mes">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="orden" ColumnName="orden" />
@@ -2617,7 +2620,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="multa_retraso">
-            <EntityTypeMapping TypeName="juntas_aguaModel.multa_retraso">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.multa_retraso">
               <MappingFragment StoreEntitySet="multa_retraso">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tiempo_espera" ColumnName="tiempo_espera" />
@@ -2631,7 +2634,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="perfil">
-            <EntityTypeMapping TypeName="juntas_aguaModel.perfil">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.perfil">
               <MappingFragment StoreEntitySet="perfil">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2640,7 +2643,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="perfil_menu">
-            <EntityTypeMapping TypeName="juntas_aguaModel.perfil_menu">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.perfil_menu">
               <MappingFragment StoreEntitySet="perfil_menu">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="perfil_id" ColumnName="perfil_id" />
@@ -2651,7 +2654,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="proveedor">
-            <EntityTypeMapping TypeName="juntas_aguaModel.proveedor">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.proveedor">
               <MappingFragment StoreEntitySet="proveedor">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="ruc" ColumnName="ruc" />
@@ -2669,11 +2672,11 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tarifa">
-            <EntityTypeMapping TypeName="juntas_aguaModel.tarifa">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.tarifa">
               <MappingFragment StoreEntitySet="tarifa">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="orden" ColumnName="orden" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nombreT" ColumnName="nombreT" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="cci" ColumnName="cci" />
                 <ScalarProperty Name="ccd" ColumnName="ccd" />
@@ -2683,7 +2686,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tipo_comprobante">
-            <EntityTypeMapping TypeName="juntas_aguaModel.tipo_comprobante">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.tipo_comprobante">
               <MappingFragment StoreEntitySet="tipo_comprobante">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="orden" ColumnName="orden" />
@@ -2693,7 +2696,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ubicacion">
-            <EntityTypeMapping TypeName="juntas_aguaModel.ubicacion">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.ubicacion">
               <MappingFragment StoreEntitySet="ubicacion">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2701,7 +2704,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="unidad_medida">
-            <EntityTypeMapping TypeName="juntas_aguaModel.unidad_medida">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.unidad_medida">
               <MappingFragment StoreEntitySet="unidad_medida">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -2710,7 +2713,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="usuario">
-            <EntityTypeMapping TypeName="juntas_aguaModel.usuario">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.usuario">
               <MappingFragment StoreEntitySet="usuario">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="apellido" ColumnName="apellido" />
@@ -2735,7 +2738,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="venta">
-            <EntityTypeMapping TypeName="juntas_aguaModel.venta">
+            <EntityTypeMapping TypeName="ipwebec_hydrosModel.venta">
               <MappingFragment StoreEntitySet="venta">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="forma_pago_id" ColumnName="forma_pago_id" />
@@ -2755,7 +2758,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="usuario_perfil" TypeName="juntas_aguaModel.usuario_perfil" StoreEntitySet="usuario_perfil">
+          <AssociationSetMapping Name="usuario_perfil" TypeName="ipwebec_hydrosModel.usuario_perfil" StoreEntitySet="usuario_perfil">
             <EndProperty Name="perfil">
               <ScalarProperty Name="id" ColumnName="perfil_id" />
             </EndProperty>

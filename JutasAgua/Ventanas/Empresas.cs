@@ -27,6 +27,15 @@ namespace JutasAgua.Ventanas
 
                 var empresa = repository.obtenerEmpresas();
 
+                if(empresa[0].facturacion == "F")
+                {
+                    empresa[0].facturacion = "Facturación";
+                }
+                else if(empresa[0].facturacion == "R")
+                {
+                    empresa[0].facturacion = "Recibo";
+                }
+
                 dataGridEmpresas.DataSource = empresa;
 
                 dataGridEmpresas.Columns[0].Visible = false;
@@ -38,10 +47,11 @@ namespace JutasAgua.Ventanas
                 dataGridEmpresas.Columns[6].HeaderText = "Telefono Móvil";
                 dataGridEmpresas.Columns[7].HeaderText = "Recaudador";
                 dataGridEmpresas.Columns[8].HeaderText = "RUC";
-                dataGridEmpresas.Columns[9].Visible = false;
+                dataGridEmpresas.Columns[9].HeaderText = "Facturación";
                 dataGridEmpresas.Columns[10].Visible = false;
                 dataGridEmpresas.Columns[11].Visible = false;
                 dataGridEmpresas.Columns[12].Visible = false;
+                dataGridEmpresas.Columns[13].Visible = false;
 
             }
             catch (Exception ex)
@@ -84,10 +94,12 @@ namespace JutasAgua.Ventanas
             txtTelefonoCel.Text = dataGridEmpresas.SelectedCells[6].Value.ToString();
             txtRecaudador.Text = dataGridEmpresas.SelectedCells[7].Value.ToString();
             txtRuc.Text = dataGridEmpresas.SelectedCells[8].Value.ToString();
-            lblcci.Text = dataGridEmpresas.SelectedCells[9].Value.ToString();
-            lblccd.Text = dataGridEmpresas.SelectedCells[10].Value.ToString();
-            lblcwi.Text = dataGridEmpresas.SelectedCells[11].Value.ToString();
-            lblcwd.Text = dataGridEmpresas.SelectedCells[12].Value.ToString();
+            txtFacturacion.Text = dataGridEmpresas.SelectedCells[9].Value.ToString();
+            lblcci.Text = dataGridEmpresas.SelectedCells[10].Value.ToString();
+            lblccd.Text = dataGridEmpresas.SelectedCells[11].Value.ToString();
+            lblcwi.Text = dataGridEmpresas.SelectedCells[12].Value.ToString();
+            lblcwd.Text = dataGridEmpresas.SelectedCells[13].Value.ToString();
+            
         }
 
         private empresa ObtenerEmpresas()
@@ -102,12 +114,7 @@ namespace JutasAgua.Ventanas
             empresa.ruc = txtRuc.Text;
             empresa.telefono_fijo = txtTelefonoFijo.Text;
             empresa.telefono_movil = txtTelefonoCel.Text;
-
-            List<usuario> usuario = repository.hacerLogin(Login.user, Login.password);
-            empresa.ccd = DateTime.Now;
-            empresa.cci = usuario[0].id;
-            empresa.cwd = DateTime.Now;
-            empresa.cwi = usuario[0].id;
+            empresa.facturacion = txtFacturacion.Text;
 
             return empresa;
 
@@ -124,6 +131,10 @@ namespace JutasAgua.Ventanas
             {
                 empresa updateEmpresa = ObtenerEmpresas();
 
+                //llenar el cwi y cwd cuando se editan datos
+                List<usuario> usuario = repository.hacerLogin(Login.user, Login.password);
+                updateEmpresa.cwd = DateTime.Now;
+                updateEmpresa.cwi = usuario[0].id;
 
                 var isModfy = repository.ModificarEmpresa(updateEmpresa);
 

@@ -22,7 +22,7 @@ namespace Modelos
         }
     
         public int id { get; set; }
-        public string nombre { get; set; }
+        public string nombreB { get; set; }
         public Nullable<int> cci { get; set; }
         public string ccd { get; set; }
         public Nullable<int> cwi { get; set; }

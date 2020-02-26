@@ -23,7 +23,7 @@ namespace Modelos
     
         public int id { get; set; }
         public int orden { get; set; }
-        public string nombre { get; set; }
+        public string nombreT { get; set; }
         public string descripcion { get; set; }
         public Nullable<int> cci { get; set; }
         public Nullable<System.DateTime> ccd { get; set; }
