@@ -10,17 +10,175 @@ namespace Modelos
 {
     public class RepositoryAgua
     {
+        private static readonly byte[] salt = Encoding.Unicode.GetBytes("7BANANAS");
+
         //Tabla usuario
+        public bool ComprobarLogin(string username, string clave)
+        {
+
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var usuario =
+                    from c in contexto.usuario
+                    where c.usuario1 == username
+                    select c;
+
+                var usuariosList = usuario.ToList();
+
+                if (usuariosList.Count > 0)
+                {
+                    var salt = usuariosList[0].salt;
+
+                    // re-generate the salted and hashed password 
+                    var saltedhashedPassword = Protector.SaltAndHashPassword(
+                      clave, salt);
+
+                    var usuarioVerificar =
+                        from c in contexto.usuario
+                        where c.usuario1 == username && c.clave == saltedhashedPassword
+                        select c;
+
+                    var usuarioVerificarList = usuarioVerificar.ToList();
+
+                    if (usuarioVerificarList.Count > 0)
+                    {
+                        if (!(usuarioVerificarList[0].usuario1 == username))
+                        {
+                            return false;
+                        }
+
+                        return (saltedhashedPassword == usuarioVerificarList[0].clave);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+        }
+
         public List<usuario> hacerLogin(string user, string clave)
+        {
+
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var usuario =
+                    from c in contexto.usuario
+                    where c.usuario1 == user
+                    select c;
+
+                var usuariosList = usuario.ToList();
+
+                var salt = usuariosList[0].salt;
+
+                // re-generate the salted and hashed password 
+                var saltedhashedPassword = Protector.SaltAndHashPassword(
+                  clave, salt);
+
+                var usuario2 =
+                from c in contexto.usuario
+                where c.usuario1 == user && c.clave == saltedhashedPassword
+                select c;
+
+                return usuario.ToList();
+
+            }
+        }
+
+        public List<usuario> ObtenerUsuarios()
         {
             using (var contexto = new ipwebec_hydrosEntities())
             {
                 var usuario =
                     from c in contexto.usuario
-                    where c.usuario1 == user && c.clave == clave
                     select c;
 
                 return usuario.ToList();
+            }
+        }
+
+        public bool InsertUsuario(usuario nuevoUsuario)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                (string encryptedPassword, string salt) = Protector.ObtenerEncryptedPassword(nuevoUsuario.clave, nuevoUsuario.usuario1);
+
+                nuevoUsuario.clave = encryptedPassword;
+                nuevoUsuario.salt = salt;
+
+                contexto.usuario.Add(nuevoUsuario);
+
+                int affected = contexto.SaveChanges();
+                return (affected == 1);
+            }
+        }
+
+        public bool EliminarUsuarios(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<usuario> usuarios = contexto.usuario.Where(u => u.id == id);
+                contexto.usuario.RemoveRange(usuarios);
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
+            }
+
+        }
+
+        public bool ModificarUsuarios(usuario nuevoUsuario)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+
+                var usuarioUpdate = contexto.usuario.First(x => x.id == nuevoUsuario.id);
+
+                usuarioUpdate.id = nuevoUsuario.id;
+                usuarioUpdate.foto = nuevoUsuario.foto;
+                usuarioUpdate.apellido = nuevoUsuario.apellido;
+                usuarioUpdate.cci = nuevoUsuario.cci;
+                usuarioUpdate.ccd = nuevoUsuario.ccd;
+                usuarioUpdate.cwd = nuevoUsuario.cwd;
+                usuarioUpdate.cwi = nuevoUsuario.cwi;
+                usuarioUpdate.direccion = nuevoUsuario.direccion;
+                usuarioUpdate.email = nuevoUsuario.email;
+                usuarioUpdate.estado = nuevoUsuario.estado;
+                usuarioUpdate.es_superadmin = nuevoUsuario.es_superadmin;
+                usuarioUpdate.fecha_nacimiento = nuevoUsuario.fecha_nacimiento;
+                usuarioUpdate.salt = nuevoUsuario.salt;
+                usuarioUpdate.nombre = nuevoUsuario.nombre;
+                usuarioUpdate.numero_identificacion = nuevoUsuario.numero_identificacion;
+                usuarioUpdate.perfil = nuevoUsuario.perfil;
+                usuarioUpdate.telefono_fijo = nuevoUsuario.telefono_fijo;
+                usuarioUpdate.telefono_movil = nuevoUsuario.telefono_movil;
+                usuarioUpdate.tipo_identificacion = nuevoUsuario.tipo_identificacion;
+                usuarioUpdate.usuario1 = nuevoUsuario.usuario1;
+
+                var usuario =
+                   from c in contexto.usuario
+                   where c.usuario1 == nuevoUsuario.usuario1
+                   select c;
+
+                var usuariosList = usuario.ToList();
+
+                var salt = usuariosList[0].salt;
+
+                // re-generate the salted and hashed password 
+                var saltedhashedPassword = Protector.SaltAndHashPassword(
+                  nuevoUsuario.clave, salt);
+
+                usuarioUpdate.clave = saltedhashedPassword;
+
+                int affected = contexto.SaveChanges();
+                return (affected == 1);
+
             }
         }
 
@@ -42,7 +200,7 @@ namespace Modelos
             using (var contexto = new ipwebec_hydrosEntities())
             {
                 empresa updateEmpresa = contexto.empresa.First(p => p.id == nuevaEmpresa.id);
-
+                //Eliminar el campo facturacion
                 updateEmpresa.nombre = nuevaEmpresa.nombre;
                 updateEmpresa.logo = nuevaEmpresa.logo;
                 updateEmpresa.recaudador = nuevaEmpresa.recaudador;
@@ -111,9 +269,17 @@ namespace Modelos
                 updateCliente.id = nuevoCliente.id;
                 updateCliente.tipo_identificacion = nuevoCliente.tipo_identificacion;
                 updateCliente.venta = nuevoCliente.venta;
+                try
+                {
+                    int affected = contexto.SaveChanges();
+                    return (affected == 1);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
 
-                int affected = contexto.SaveChanges();
-                return (affected == 1);
             }
         }
 
@@ -125,6 +291,47 @@ namespace Modelos
 
                 int affected = contexto.SaveChanges();
                 return (affected == 1);
+            }
+        }
+
+        public bool EliminarCliente(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<cliente> clientes = contexto.cliente.Where(c => c.id == id);
+                contexto.cliente.RemoveRange(clientes);
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
+            }
+        }
+
+        public List<cliente> BuscarClientePorNombre(string nombre)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var clientes = contexto.cliente.Where(c => c.nombre.StartsWith(nombre));
+
+                return clientes.ToList();
+            }
+        }
+        public List<cliente> BuscarClientePorCedula(string cedula)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var clientes = contexto.cliente.Where(c => c.numero_identificacion.StartsWith(cedula));
+
+                return clientes.ToList();
+            }
+        }
+        public List<cliente> BuscarClientePorDireccion(string direccion)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var clientes = contexto.cliente.Where(c => c.direccion.StartsWith(direccion));
+
+                return clientes.ToList();
             }
         }
 
@@ -155,6 +362,19 @@ namespace Modelos
 
 
                 return usuario.ToList();
+            }
+        }
+
+        public bool EliminarMedidor(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<medidor> medidor = contexto.medidor.Where(m => m.cliente_id == id);
+                contexto.medidor.RemoveRange(medidor);
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
             }
         }
 

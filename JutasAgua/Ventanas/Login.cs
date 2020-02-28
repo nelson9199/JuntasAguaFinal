@@ -18,39 +18,41 @@ namespace JutasAgua
 
         public static string user;
         public static string password;
-       
+
         public Login()
         {
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void txtPassword_OnValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogin_Click_1(object sender, EventArgs e)
         {
             string user = txtUser.Text;
             string password = txtPassword.Text;
             Login.user = txtUser.Text;
             Login.password = txtPassword.Text;
 
-            try
-            {
-                var datos = repository.hacerLogin(user,password);
 
-                if(datos.Count > 0)
-                {
-                    MessageBox.Show("Acceso Exitoso");
-                    this.Hide();
-                    pagPrincipal = new PagPrincipal();
-                    pagPrincipal.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Usuario y/o Contraseña Incorrectos");
-                }
+            var isOk = repository.ComprobarLogin(user, password);
 
-            }catch(Exception ex)
+            if (isOk)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Acceso Exitoso");
+                this.Hide();
+                pagPrincipal = new PagPrincipal();
+                pagPrincipal.Show();
             }
+            else
+            {
+                MessageBox.Show("Usuario y/o Contraseña Incorrectos");
+            }
+
+
+
         }
     }
 }

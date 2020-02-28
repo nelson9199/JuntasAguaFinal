@@ -27,11 +27,11 @@ namespace JutasAgua.Ventanas
 
                 var empresa = repository.obtenerEmpresas();
 
-                if(empresa[0].facturacion == "F")
+                if (empresa[0].facturacion == "F")
                 {
                     empresa[0].facturacion = "Facturación";
                 }
-                else if(empresa[0].facturacion == "R")
+                else if (empresa[0].facturacion == "R")
                 {
                     empresa[0].facturacion = "Recibo";
                 }
@@ -94,12 +94,13 @@ namespace JutasAgua.Ventanas
             txtTelefonoCel.Text = dataGridEmpresas.SelectedCells[6].Value.ToString();
             txtRecaudador.Text = dataGridEmpresas.SelectedCells[7].Value.ToString();
             txtRuc.Text = dataGridEmpresas.SelectedCells[8].Value.ToString();
-            txtFacturacion.Text = dataGridEmpresas.SelectedCells[9].Value.ToString();
-            lblcci.Text = dataGridEmpresas.SelectedCells[10].Value.ToString();
-            lblccd.Text = dataGridEmpresas.SelectedCells[11].Value.ToString();
-            lblcwi.Text = dataGridEmpresas.SelectedCells[12].Value.ToString();
-            lblcwd.Text = dataGridEmpresas.SelectedCells[13].Value.ToString();
-            
+
+            dropFactu.Text = dataGridEmpresas.SelectedCells[9].Value == null ? "" : dataGridEmpresas.SelectedCells[9].Value.ToString();
+            lblcci.Text = dataGridEmpresas.SelectedCells[10].Value == null ? "" : dataGridEmpresas.SelectedCells[10].Value.ToString();
+            lblccd.Text = dataGridEmpresas.SelectedCells[11].Value == null ? "" : dataGridEmpresas.SelectedCells[11].Value.ToString();
+            lblcwi.Text = dataGridEmpresas.SelectedCells[12].Value == null ? "" : dataGridEmpresas.SelectedCells[12].Value.ToString();
+            lblcwd.Text = dataGridEmpresas.SelectedCells[13].Value == null ? "" : dataGridEmpresas.SelectedCells[13].Value.ToString();
+
         }
 
         private empresa ObtenerEmpresas()
@@ -114,7 +115,16 @@ namespace JutasAgua.Ventanas
             empresa.ruc = txtRuc.Text;
             empresa.telefono_fijo = txtTelefonoFijo.Text;
             empresa.telefono_movil = txtTelefonoCel.Text;
-            empresa.facturacion = txtFacturacion.Text;
+
+            if (dropFactu.Text == "FACTURA")
+            {
+                empresa.facturacion = "F";
+            }
+            else if (dropFactu.Text == "RECIBO")
+            {
+                empresa.facturacion = "R";
+            }
+
 
             return empresa;
 
@@ -127,35 +137,35 @@ namespace JutasAgua.Ventanas
 
         private void btnGuardarCambios_Click(object sender, EventArgs e)
         {
-            try
+            //try
+            //{
+            empresa updateEmpresa = ObtenerEmpresas();
+
+            //llenar el cwi y cwd cuando se editan datos
+            List<usuario> usuario = repository.hacerLogin(Login.user, Login.password);
+            updateEmpresa.cwd = DateTime.Now;
+            updateEmpresa.cwi = usuario[0].id;
+
+            var isModfy = repository.ModificarEmpresa(updateEmpresa);
+
+            if (isModfy)
             {
-                empresa updateEmpresa = ObtenerEmpresas();
-
-                //llenar el cwi y cwd cuando se editan datos
-                List<usuario> usuario = repository.hacerLogin(Login.user, Login.password);
-                updateEmpresa.cwd = DateTime.Now;
-                updateEmpresa.cwi = usuario[0].id;
-
-                var isModfy = repository.ModificarEmpresa(updateEmpresa);
-
-                if (isModfy)
-                {
-                    MessageBox.Show("Cambios realizados con éxito");
-                    panelEmpresa.Visible = false;
-                    Mostrar();
-
-                }
-                else
-                {
-                    MessageBox.Show("No se ficarion datos");
-                }
+                MessageBox.Show("Cambios realizados con éxito");
+                panelEmpresa.Visible = false;
+                Mostrar();
 
             }
-            catch(Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("No se ficarion datos");
             }
-            
+
+            //}
+            //catch(Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+
         }
     }
 }

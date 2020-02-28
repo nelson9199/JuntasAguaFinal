@@ -16,6 +16,12 @@ namespace JutasAgua.Ventanas
         RepositoryAgua repository = new RepositoryAgua();
         Medidores medidores = null;
 
+        bool buscarPorNombre = false;
+        bool buscarPorCedula = false;
+        bool buscarPorDireccion = false;
+
+
+
         public Clientes()
         {
             InitializeComponent();
@@ -24,8 +30,23 @@ namespace JutasAgua.Ventanas
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
+            txtApellidos.Text = "";
+            txtBuscar.Text = "";
+            txtCelular.Text = "";
+            txtDireccion.Text = "";
+            txtEmail.Text = "";
+            txtNombCli.Text = "";
+            txtNumIden.Text = "";
+            txtTeleFijo.Text = "";
+            dropBuscarPor.Text = "";
+            dropEstado.Text = "";
+            dropTipoIdenti.Text = "";
+            dropSexo.Text = "";
+
             panelClientes.Visible = true;
             btnGuardarCambios.Enabled = false;
+            btnGuardar.Enabled = true;
+            btnVerMedidor.Enabled = false;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -36,6 +57,7 @@ namespace JutasAgua.Ventanas
 
         private void Clientes_Load(object sender, EventArgs e)
         {
+
             Mostrar();
             txtBuscar.Enabled = false;
             panelClientes.Visible = false;
@@ -47,6 +69,48 @@ namespace JutasAgua.Ventanas
 
         }
 
+        List<cliente> MostrarDatosOk(List<cliente> clientes)
+        {
+            for (int i = 0; i < clientes.Count; i++)
+            {
+                switch (clientes[i].tipo_identificacion)
+                {
+                    case "C":
+                        clientes[i].tipo_identificacion = "CÈDULA";
+                        break;
+                    case "P":
+                        clientes[i].tipo_identificacion = "PASAPORTE";
+                        break;
+                    case "R":
+                        clientes[i].tipo_identificacion = "RUC";
+                        break;
+
+                }
+
+                switch (clientes[i].sexo)
+                {
+                    case "F":
+                        clientes[i].sexo = "Femenino";
+                        break;
+                    case "M":
+                        clientes[i].sexo = "Masculino";
+                        break;
+                }
+
+                switch (clientes[i].estado)
+                {
+                    case "A":
+                        clientes[i].estado = "Activo";
+                        break;
+                    case "I":
+                        clientes[i].sexo = "Inactivo";
+                        break;
+                }
+            }
+
+            return clientes;
+        }
+
         private void Mostrar()
         {
             try
@@ -54,44 +118,9 @@ namespace JutasAgua.Ventanas
 
                 var clientes = repository.OtenerClientes();
 
-                for (int i = 0; i < clientes.Count; i++)
-                {
-                    switch (clientes[i].tipo_identificacion)
-                    {
-                        case "C":
-                            clientes[i].tipo_identificacion = "CÈDULA";
-                            break;
-                        case "P":
-                            clientes[i].tipo_identificacion = "PASAPORTE";
-                            break;
-                        case "R":
-                            clientes[i].tipo_identificacion = "RUC";
-                            break;
+                dataGridClientes.DataSource = MostrarDatosOk(clientes); ;
 
-                    }
-
-                    switch (clientes[i].sexo)
-                    {
-                        case "F":
-                            clientes[i].sexo = "Femenino";
-                            break;
-                        case "M":
-                            clientes[i].sexo = "Masculino";
-                            break;
-                    }
-
-                    switch (clientes[i].estado)
-                    {
-                        case "A":
-                            clientes[i].estado = "Activo";
-                            break;
-                        case "I":
-                            clientes[i].sexo = "Inactivo";
-                            break;
-                    }
-                }
-
-                dataGridClientes.DataSource = clientes;
+                dataGridClientes.Columns[0].DisplayIndex = 19;
 
                 dataGridClientes.Columns[1].Visible = false;
                 dataGridClientes.Columns[2].HeaderText = "Nombre";
@@ -136,6 +165,8 @@ namespace JutasAgua.Ventanas
         private void dataGridClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             panelClientes.Visible = true;
+            btnGuardar.Enabled = false;
+            btnGuardarCambios.Enabled = true;
             btnVerMedidor.Enabled = true;
             try
             {
@@ -180,16 +211,47 @@ namespace JutasAgua.Ventanas
             cliente.apellido = txtApellidos.Text;
             cliente.direccion = txtDireccion.Text;
             cliente.email = txtEmail.Text;
-            cliente.estado = dropEstado.Text;
+
             cliente.fecha_nacimiento = dateFecNac.Value;
             cliente.foto = lblFoto.Text;
             cliente.id = Convert.ToInt32(lblId.Text);
             cliente.nombre = txtNombCli.Text;
             cliente.numero_identificacion = txtNumIden.Text;
-            cliente.sexo = dropSexo.Text;
             cliente.telefono_celular = txtCelular.Text;
             cliente.telefono_fijo = txtTeleFijo.Text;
-            cliente.tipo_identificacion = dropTipoIdenti.Text;
+            if (dropTipoIdenti.Items.Contains("CÉDULA"))
+            {
+                cliente.tipo_identificacion = "C";
+            }
+            else if (dropTipoIdenti.Items.Contains("PASAPORTE"))
+            {
+                cliente.tipo_identificacion = "P";
+            }
+            else if (dropTipoIdenti.Items.Contains("RUC"))
+            {
+                cliente.tipo_identificacion = "R";
+            }
+
+            if (dropEstado.Items.Contains("ACTIVO"))
+            {
+                cliente.estado = "A";
+            }
+            else if (dropEstado.Items.Contains("INACTIVO"))
+            {
+                cliente.estado = "I";
+            }
+
+
+            if (dropSexo.Items.Contains("MASCULINO"))
+            {
+                cliente.sexo = "M";
+            }
+            else if (dropSexo.Items.Contains("FEMENINO"))
+            {
+                cliente.sexo = "F";
+            }
+
+
 
             return cliente;
 
@@ -224,8 +286,32 @@ namespace JutasAgua.Ventanas
             updatedCliente.cwi = usuario[0].id;
             updatedCliente.cwd = DateTime.Now;
 
-            try
+            //Validaciones de formulario
+            if (txtNombCli.Text == "")
             {
+                errorProvider1.SetError(txtNombCli, "Debe llenar este campo");
+            }
+            if (txtApellidos.Text == "")
+            {
+                errorProvider1.SetError(txtApellidos, "Debe llenar este campo");
+            }
+            if (txtNumIden.Text == "")
+            {
+                errorProvider1.SetError(txtNumIden, "Debe llenar este campo");
+            }
+            if (dropTipoIdenti.Text == null)
+            {
+                errorProvider1.SetError(dropTipoIdenti, "Debe escoger un tipo de Identificacìon");
+
+            }
+            if (txtNombCli.Text == "" || txtApellidos.Text == "" || txtNumIden.Text == "" || dropTipoIdenti.Text == null)
+            {
+                return;
+            }
+            else
+            {
+                //try
+                //{
                 var isOk = repository.ActualizarCliente(updatedCliente);
 
                 if (isOk)
@@ -239,11 +325,14 @@ namespace JutasAgua.Ventanas
                     MessageBox.Show("No se han podido modificar datos");
                 }
 
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.Message);
+                //}
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -266,74 +355,235 @@ namespace JutasAgua.Ventanas
                 errorProvider1.SetError(dropTipoIdenti, "Debe escoger un tipo de Identificacìon");
 
             }
-            if (txtNombCli.Text == null || txtApellidos.Text == null || txtNumIden.Text == null || dropTipoIdenti.Text == null)
+            if (txtNombCli.Text == "" || txtApellidos.Text == "" || txtNumIden.Text == "" || dropTipoIdenti.Text == null)
             {
                 return;
             }
-
-            try
+            else
             {
-                var cliente = ObtenerDatosDelGridInsert();
-                List<usuario> usuario = repository.hacerLogin(Login.user, Login.password);
-                cliente.cci = usuario[0].id;
-                cliente.ccd = DateTime.Now;
-
-                switch (cliente.tipo_identificacion)
+                try
                 {
-                    case "CÉDULA":
-                        cliente.tipo_identificacion = "C";
-                        break;
-                    case "PASAPORTE":
-                        cliente.tipo_identificacion = "P";
-                        break;
-                    case "RUC":
-                        cliente.tipo_identificacion = "R";
-                        break;
-                }
+                    var cliente = ObtenerDatosDelGridInsert();
+                    List<usuario> usuario = repository.hacerLogin(Login.user, Login.password);
+                    cliente.cci = usuario[0].id;
+                    cliente.ccd = DateTime.Now;
 
-                switch (cliente.sexo)
+                    switch (cliente.tipo_identificacion)
+                    {
+                        case "CÉDULA":
+                            cliente.tipo_identificacion = "C";
+                            break;
+                        case "PASAPORTE":
+                            cliente.tipo_identificacion = "P";
+                            break;
+                        case "RUC":
+                            cliente.tipo_identificacion = "R";
+                            break;
+                    }
+
+                    switch (cliente.sexo)
+                    {
+                        case "FEMENINO":
+                            cliente.sexo = "F";
+                            break;
+                        case "MASCULINO":
+                            cliente.sexo = "M";
+                            break;
+                    }
+
+                    switch (cliente.estado)
+                    {
+                        case "ACTIVO":
+                            cliente.estado = "A";
+                            break;
+                        case "INACTIVO":
+                            cliente.estado = "I";
+                            break;
+                    }
+
+                    var isOk = repository.InsertarCliente(cliente);
+
+                    if (isOk)
+                    {
+                        MessageBox.Show("Cliente Guardado con Èxito");
+                        panelClientes.Visible = false;
+                        Mostrar();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudieron guardar los datos");
+                    }
+
+                }
+                catch (Exception ex)
                 {
-                    case "FEMENINO":
-                        cliente.sexo = "F";
-                        break;
-                    case "MASCULINO":
-                        cliente.sexo = "M";
-                        break;
+                    MessageBox.Show(ex.Message);
                 }
-
-                switch (cliente.estado)
-                {
-                    case "ACTIVO":
-                        cliente.estado = "A";
-                        break;
-                    case "INACTIVO":
-                        cliente.estado = "I";
-                        break;
-                }
-
-                var isOk = repository.InsertarCliente(cliente);
-
-                if (isOk)
-                {
-                    MessageBox.Show("Cliente Guardado con Èxito");
-                    panelClientes.Visible = false;
-                    Mostrar();
-                }
-                else
-                {
-                    MessageBox.Show("No se pudieron guardar los datos");
-                }
-
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+
         }
 
         private void txtNombCli_TextChange(object sender, EventArgs e)
         {
             errorProvider1.SetError(txtNombCli, "");
+        }
+
+        private void txtApellidos_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(txtApellidos, "");
+        }
+
+        private void dropTipoIdenti_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(dropTipoIdenti, "");
+        }
+
+        private void txtNumIden_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(txtNumIden, "");
+        }
+
+        private void dataGridClientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == this.dataGridClientes.Columns["eliminar"].Index)
+            {
+                DialogResult result;
+
+                result = MessageBox.Show("¿Realmente desea eliminar este Cliente?", "Eliminando Registros", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                if (result == DialogResult.OK)
+                {
+                    try
+                    {
+                        List<ConsultaMedidores> hayMedidor = repository.ObtenerMedidioresPorId(Convert.ToInt32(dataGridClientes.SelectedCells[1].Value));
+
+                        if (hayMedidor.Count > 0)
+                        {
+                            var medidorBorrado = repository.EliminarMedidor(Convert.ToInt32(dataGridClientes.SelectedCells[1].Value));
+
+                            if (medidorBorrado)
+                            {
+                                var isOk = repository.EliminarCliente(Convert.ToInt32(dataGridClientes.SelectedCells[1].Value));
+
+                                if (isOk)
+                                {
+                                    MessageBox.Show("Cliente Eliminado con Éxito");
+                                    Mostrar();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No se puede eliminar");
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            var isOk = repository.EliminarCliente(Convert.ToInt32(dataGridClientes.SelectedCells[1].Value));
+
+                            if (isOk)
+                            {
+                                MessageBox.Show("Cliente Eliminado con Éxito");
+                                Mostrar();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se puede eliminar");
+                            }
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+
+        }
+
+        private void dropBuscarPor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dropBuscarPor.SelectedItem.ToString() == "Nombre")
+            {
+                txtBuscar.Enabled = true;
+                buscarPorNombre = true;
+                buscarPorCedula = false;
+                buscarPorDireccion = false;
+
+            }
+            else if (dropBuscarPor.SelectedItem.ToString() == "Cedula")
+            {
+                txtBuscar.Enabled = true;
+                buscarPorNombre = false;
+                buscarPorCedula = true;
+                buscarPorDireccion = false;
+            }
+            else if (dropBuscarPor.SelectedItem.ToString() == "Direccion")
+            {
+                txtBuscar.Enabled = true;
+                buscarPorNombre = false;
+                buscarPorCedula = false;
+                buscarPorDireccion = true;
+            }
+            else if (dropBuscarPor.SelectedItem.ToString() == "")
+            {
+                txtBuscar.Enabled = false;
+                buscarPorNombre = false;
+                buscarPorCedula = false;
+                buscarPorDireccion = false;
+                txtBuscar.Text = "";
+                Mostrar();
+            }
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (buscarPorNombre == true)
+            {
+                try
+                {
+                    var clientes = repository.BuscarClientePorNombre(txtBuscar.Text);
+
+                    dataGridClientes.DataSource = MostrarDatosOk(clientes);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else if (buscarPorCedula == true)
+            {
+                try
+                {
+                    var clientes = repository.BuscarClientePorCedula(txtBuscar.Text);
+
+                    dataGridClientes.DataSource = MostrarDatosOk(clientes); ;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else if (buscarPorDireccion == true)
+            {
+                try
+                {
+                    var clientes = repository.BuscarClientePorDireccion(txtBuscar.Text);
+
+                    dataGridClientes.DataSource = MostrarDatosOk(clientes); ;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 

@@ -450,6 +450,7 @@
           <Property Name="ccd" Type="datetime" Precision="0" />
           <Property Name="cwi" Type="int" />
           <Property Name="cwd" Type="datetime" Precision="0" />
+          <Property Name="salt" Type="varchar" MaxLength="2000" />
         </EntityType>
         <EntityType Name="usuario_perfil">
           <Key>
@@ -1623,6 +1624,7 @@
           <Property Name="ccd" Type="DateTime" />
           <Property Name="cwi" Type="Int32" />
           <Property Name="cwd" Type="DateTime" />
+          <Property Name="salt" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="lectura" Relationship="Self.fk_lectura_usuario1" FromRole="usuario" ToRole="lectura" />
           <NavigationProperty Name="perfil" Relationship="Self.usuario_perfil" FromRole="usuario" ToRole="perfil" />
         </EntityType>
@@ -2734,6 +2736,7 @@
                 <ScalarProperty Name="ccd" ColumnName="ccd" />
                 <ScalarProperty Name="cwi" ColumnName="cwi" />
                 <ScalarProperty Name="cwd" ColumnName="cwd" />
+                <ScalarProperty Name="salt" ColumnName="salt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -16,42 +16,52 @@ namespace JutasAgua.Ventanas
         RepositoryAgua repository = new RepositoryAgua();
 
         int numCli;
+        string nombCli;
 
-        public Medidores(int numCli = 0)
+        public Medidores(int numCli = 0, string nombCli = "")
         {
             InitializeComponent();
 
+            panelMedidior.Visible = false;
+
             this.numCli = numCli;
+            this.nombCli = nombCli;
 
             if (this.numCli > 0)
             {
                 Mostrar();
+                lblMedidorUser.Text = nombCli;
             }
         }
 
         private void Mostrar()
-         {
+        {
             var medidores = repository.ObtenerMedidioresPorId(this.numCli);
 
-                if(medidores[0].estado == "A")
+
+            if (medidores.Count > 0)
+            {
+
+                if (medidores[0].estado == "A")
                 {
                     medidores[0].estado = "Activo";
                 }
-                else if(medidores[0].estado == "I")
+                else if (medidores[0].estado == "I")
                 {
                     medidores[0].estado = "Activo";
                 }
 
-            dataGridMedidores.DataSource = medidores;
+                dataGridMedidores.DataSource = medidores;
 
-            dataGridMedidores.Columns[1].HeaderText = "N";
-            dataGridMedidores.Columns[2].HeaderText = "Nombre";
-            dataGridMedidores.Columns[3].HeaderText = "Barrio";
-            dataGridMedidores.Columns[4].HeaderText = "Tarifa";
-            dataGridMedidores.Columns[5].HeaderText = "Serie";
-            dataGridMedidores.Columns[6].HeaderText = "Lectura Inicial";
-            dataGridMedidores.Columns[7].HeaderText = "Estado";
+                dataGridMedidores.Columns[1].HeaderText = "N";
+                dataGridMedidores.Columns[2].HeaderText = "Nombre";
+                dataGridMedidores.Columns[3].HeaderText = "Barrio";
+                dataGridMedidores.Columns[4].HeaderText = "Tarifa";
+                dataGridMedidores.Columns[5].HeaderText = "Serie";
+                dataGridMedidores.Columns[6].HeaderText = "Lectura Inicial";
+                dataGridMedidores.Columns[7].HeaderText = "Estado";
 
+            }
 
         }
 
@@ -65,6 +75,32 @@ namespace JutasAgua.Ventanas
         {
 
 
+        }
+
+        private void bunifuDropdown2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            panelMedidior.Visible = true;
+            btnGuardar.Enabled = true;
+            btnGuardarCambios.Enabled = false;
+            txtBuscar.Text = "";
+            txtLecturaInicial.Text = "";
+            txtNomMedi.Text = "";
+            txtSerie.Text = "";
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            panelMedidior.Visible = false;
         }
     }
 }

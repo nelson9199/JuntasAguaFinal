@@ -14,7 +14,7 @@ namespace JutasAgua.Ventanas
     {
         Empresas formEmpresas = null;
         Clientes formClientes = null;
-
+        Usuarios formUsuarios = null;
         public PagPrincipal()
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace JutasAgua.Ventanas
         //ABRIR FROMA EMPRESAS
         private void empresasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(formEmpresas == null)
+            if (formEmpresas == null)
             {
                 formEmpresas = new Empresas();
                 formEmpresas.MdiParent = this;
@@ -73,6 +73,34 @@ namespace JutasAgua.Ventanas
         private void CerrarFormaClientes(object sender, FormClosedEventArgs e)
         {
             formClientes = null;
+        }
+
+        private void perdilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //abrir ventana usuarios
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (formUsuarios == null)
+            {
+                formUsuarios = new Usuarios();
+                formUsuarios.MdiParent = this;
+                formUsuarios.FormClosed += new FormClosedEventHandler(CerrarFormaUsuarios);
+                formUsuarios.Show();
+                formUsuarios.WindowState = FormWindowState.Maximized;
+
+            }
+            else
+            {
+                formUsuarios.Activate();
+            }
+        }
+
+        private void CerrarFormaUsuarios(object sender, FormClosedEventArgs e)
+        {
+            formUsuarios = null;
         }
     }
 }
