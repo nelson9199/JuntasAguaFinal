@@ -1363,9 +1363,9 @@
             this.label14.Location = new System.Drawing.Point(491, 396);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(63, 28);
+            this.label14.Size = new System.Drawing.Size(124, 28);
             this.label14.TabIndex = 1;
-            this.label14.Text = "Clave:";
+            this.label14.Text = "Nueva Clave:";
             // 
             // txtDireccion
             // 

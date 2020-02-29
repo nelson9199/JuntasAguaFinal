@@ -15,6 +15,10 @@ namespace JutasAgua.Ventanas
         Empresas formEmpresas = null;
         Clientes formClientes = null;
         Usuarios formUsuarios = null;
+        Marcas formMarcas = null;
+        Barrio formBarrio = null;
+        Tarifas tarifas = null;
+
         public PagPrincipal()
         {
             InitializeComponent();
@@ -102,5 +106,74 @@ namespace JutasAgua.Ventanas
         {
             formUsuarios = null;
         }
+
+        //Abrir from Marcas
+        private void marcasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (formMarcas == null)
+            {
+                formMarcas = new Marcas();
+                formMarcas.MdiParent = this;
+                formMarcas.FormClosed += new FormClosedEventHandler(CerrarFormaMarcas);
+                formMarcas.Show();
+                formMarcas.WindowState = FormWindowState.Normal;
+
+            }
+            else
+            {
+                formMarcas.Activate();
+            }
+        }
+
+
+        private void CerrarFormaMarcas(object sender, FormClosedEventArgs e)
+        {
+            formMarcas = null;
+        }
+
+        private void barrioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (formBarrio == null)
+            {
+                formBarrio = new Barrio();
+                formBarrio.MdiParent = this;
+                formBarrio.FormClosed += new FormClosedEventHandler(CerrarFormaBarrio);
+                formBarrio.Show();
+                formBarrio.WindowState = FormWindowState.Normal;
+
+            }
+            else
+            {
+                formBarrio.Activate();
+            }
+        }
+
+
+        private void CerrarFormaBarrio(object sender, FormClosedEventArgs e)
+        {
+            formBarrio = null;
+        }
+
+        //abrir ventana tarifas
+        private void tarifasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tarifas == null)
+            {
+                tarifas = new Tarifas();
+                tarifas.MdiParent = this;
+                tarifas.FormClosed += new FormClosedEventHandler(CerrarFormaTarifas);
+                tarifas.Show();
+            }
+            else
+            {
+                tarifas.Activate();
+            }
+        }
+
+        private void CerrarFormaTarifas(object sender, FormClosedEventArgs e)
+        {
+            tarifas = null;
+        }
+
     }
 }

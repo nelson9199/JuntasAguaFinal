@@ -170,20 +170,20 @@ namespace JutasAgua.Ventanas
             btnVerMedidor.Enabled = true;
             try
             {
-                lblId.Text = dataGridClientes.SelectedCells[1].Value.ToString();
-                txtNombCli.Text = dataGridClientes.SelectedCells[2].Value.ToString();
-                txtApellidos.Text = dataGridClientes.SelectedCells[3].Value.ToString();
+                lblId.Text = dataGridClientes.SelectedCells[1].Value?.ToString();
+                txtNombCli.Text = dataGridClientes.SelectedCells[2].Value?.ToString();
+                txtApellidos.Text = dataGridClientes.SelectedCells[3].Value?.ToString();
                 dateFecNac.Value = Convert.ToDateTime(dataGridClientes.SelectedCells[4].Value);
-                dropTipoIdenti.Text = dataGridClientes.SelectedCells[5].Value.ToString();
-                txtNumIden.Text = dataGridClientes.SelectedCells[6].Value.ToString();
-                txtDireccion.Text = dataGridClientes.SelectedCells[7].Value.ToString();
-                txtEmail.Text = dataGridClientes.SelectedCells[8].Value.ToString();
+                dropTipoIdenti.Text = dataGridClientes.SelectedCells[5].Value?.ToString();
+                txtNumIden.Text = dataGridClientes.SelectedCells[6].Value?.ToString();
+                txtDireccion.Text = dataGridClientes.SelectedCells[7]?.Value.ToString();
+                txtEmail.Text = dataGridClientes.SelectedCells[8]?.Value.ToString();
 
                 lblFoto.Text = dataGridClientes.SelectedCells[9].Value != null ? lblFoto.Text = dataGridClientes.SelectedCells[9].Value.ToString() : "";
-                txtTeleFijo.Text = dataGridClientes.SelectedCells[10].Value.ToString();
-                txtCelular.Text = dataGridClientes.SelectedCells[11].Value.ToString();
-                dropSexo.Text = dataGridClientes.SelectedCells[12].Value.ToString();
-                dropEstado.Text = dataGridClientes.SelectedCells[13].Value.ToString();
+                txtTeleFijo.Text = dataGridClientes.SelectedCells[10].Value?.ToString();
+                txtCelular.Text = dataGridClientes.SelectedCells[11].Value?.ToString();
+                dropSexo.Text = dataGridClientes.SelectedCells[12].Value?.ToString();
+                dropEstado.Text = dataGridClientes.SelectedCells[13].Value?.ToString();
                 if (dataGridClientes.SelectedCells[14].Value != null)
                 {
                     lblcci.Text = dataGridClientes.SelectedCells[14].Value.ToString();
@@ -310,26 +310,26 @@ namespace JutasAgua.Ventanas
             }
             else
             {
-                //try
-                //{
-                var isOk = repository.ActualizarCliente(updatedCliente);
-
-                if (isOk)
+                try
                 {
-                    MessageBox.Show("Datos Modificados con Éxito");
-                    panelClientes.Visible = false;
-                    Mostrar();
-                }
-                else
-                {
-                    MessageBox.Show("No se han podido modificar datos");
-                }
+                    var isOk = repository.ActualizarCliente(updatedCliente);
 
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show(ex.Message);
-                //}
+                    if (isOk)
+                    {
+                        MessageBox.Show("Datos Modificados con Éxito");
+                        panelClientes.Visible = false;
+                        Mostrar();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se han podido modificar datos");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
 

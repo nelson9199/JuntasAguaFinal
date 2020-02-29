@@ -402,6 +402,7 @@
           <Property Name="ccd" Type="datetime" Precision="0" />
           <Property Name="cwi" Type="int" />
           <Property Name="cwd" Type="datetime" Precision="0" />
+          <Property Name="acumulativa" Type="char" MaxLength="2" />
         </EntityType>
         <EntityType Name="tipo_comprobante">
           <Key>
@@ -1570,6 +1571,7 @@
           <Property Name="ccd" Type="DateTime" />
           <Property Name="cwi" Type="Int32" />
           <Property Name="cwd" Type="DateTime" />
+          <Property Name="acumulativa" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="costo_tarifa" Relationship="Self.fk_costo_tarifa_tarifa1" FromRole="tarifa" ToRole="costo_tarifa" />
           <NavigationProperty Name="medidor" Relationship="Self.fk_medidor_tarifa2" FromRole="tarifa" ToRole="medidor" />
         </EntityType>
@@ -2684,6 +2686,7 @@
                 <ScalarProperty Name="ccd" ColumnName="ccd" />
                 <ScalarProperty Name="cwi" ColumnName="cwi" />
                 <ScalarProperty Name="cwd" ColumnName="cwd" />
+                <ScalarProperty Name="acumulativa" ColumnName="acumulativa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

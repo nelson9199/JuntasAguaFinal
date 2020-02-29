@@ -29,6 +29,7 @@ namespace Modelos
         public Nullable<System.DateTime> ccd { get; set; }
         public Nullable<int> cwi { get; set; }
         public Nullable<System.DateTime> cwd { get; set; }
+        public string acumulativa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<costo_tarifa> costo_tarifa { get; set; }

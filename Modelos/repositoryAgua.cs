@@ -221,7 +221,7 @@ namespace Modelos
         }
 
         //Tabla tarifa
-        public List<tarifa> OtenerTarifas()
+        public List<tarifa> ObtenerTarifas()
         {
             using (var contexto = new ipwebec_hydrosEntities())
             {
@@ -232,6 +232,48 @@ namespace Modelos
                 return tarifas.ToList();
             }
         }
+
+        public bool InsertarTarifa(tarifa nuevaTarifa)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                contexto.tarifa.Add(nuevaTarifa);
+
+                int affected = contexto.SaveChanges();
+                return (affected == 1);
+            }
+        }
+
+        public bool ModificarTarifa(tarifa nuevaTarifa)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var tarifaUpdate = contexto.tarifa.First(t => t.id == nuevaTarifa.id);
+
+                tarifaUpdate.nombreT = nuevaTarifa.nombreT;
+                tarifaUpdate.acumulativa = nuevaTarifa.acumulativa;
+                tarifaUpdate.descripcion = nuevaTarifa.descripcion;
+                tarifaUpdate.orden = nuevaTarifa.orden;
+
+                int affected = contexto.SaveChanges();
+                return (affected == 1);
+            }
+        }
+
+        public bool EliminarTarifa(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<tarifa> tarifaUpdate = contexto.tarifa.Where(t => t.id == id);
+
+                contexto.tarifa.RemoveRange(tarifaUpdate);
+
+                int affected = contexto.SaveChanges();
+                return (affected == 1);
+            }
+        }
+
+
 
         //Tabla cliente
         public List<cliente> OtenerClientes()
@@ -378,6 +420,105 @@ namespace Modelos
             }
         }
 
+        //Tabla Marca
+        public List<marca> ObtenerMarcas()
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var marcas =
+                    from m in contexto.marca
+                    select m;
+
+                return marcas.ToList();
+            }
+        }
+
+        public bool InsertarMarca(marca nuevaMarca)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                contexto.marca.Add(nuevaMarca);
+
+                int affected = contexto.SaveChanges();
+                return (affected == 1);
+            }
+        }
+        public bool ModificarMarca(marca nuevaMarca)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var marcaUpdate = contexto.marca.First(m => m.id == nuevaMarca.id);
+
+                marcaUpdate.nombre = nuevaMarca.nombre;
+
+                int affected = contexto.SaveChanges();
+                return (affected == 1);
+
+            }
+        }
+
+        public bool EliminarMarca(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<marca> marca = contexto.marca.Where(m => m.id == id);
+                contexto.marca.RemoveRange(marca);
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
+            }
+        }
+
+        //tabla Barrio
+        public List<barrio> ObtenerBarrios()
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var barrios = contexto.barrio.Select(b => b);
+
+                return barrios.ToList();
+            }
+        }
+
+        public bool InsertarBarrio(barrio barrio)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                contexto.barrio.Add(barrio);
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
+            }
+        }
+
+        public bool ModificarBarrio(barrio nuevoBarrio)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var updatedBarrio = contexto.barrio.First(b => b.id == nuevoBarrio.id);
+
+                updatedBarrio.nombreB = nuevoBarrio.nombreB;
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
+            }
+        }
+
+        public bool EliminarBarrio(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<barrio> barrio = contexto.barrio.Where(b => b.id == id);
+                contexto.barrio.RemoveRange(barrio);
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
+            }
+        }
     }
 
     public partial class ConsultaMedidores

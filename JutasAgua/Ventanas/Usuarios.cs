@@ -89,6 +89,9 @@ namespace JutasAgua.Ventanas
             panelUsuarios.Visible = true;
             btnGuardar.Enabled = true;
             btnGuardarCambios.Enabled = false;
+            txtApellidos.Enabled = true;
+            txtNombCli.Enabled = true;
+            txtUser.Enabled = true;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -211,21 +214,29 @@ namespace JutasAgua.Ventanas
             panelUsuarios.Visible = true;
             btnGuardar.Enabled = false;
 
+
             try
             {
-                lblId.Text = dataGridUsuarios.SelectedCells[1].Value.ToString();
-                txtApellidos.Text = dataGridUsuarios.SelectedCells[2].Value.ToString();
-                txtCelular.Text = dataGridUsuarios.SelectedCells[8].Value.ToString();
-                txtDireccion.Text = dataGridUsuarios.SelectedCells[11].Value.ToString();
-                txtEmail.Text = dataGridUsuarios.SelectedCells[9].Value.ToString();
-                txtNombCli.Text = dataGridUsuarios.SelectedCells[3].Value.ToString();
-                txtNumIden.Text = dataGridUsuarios.SelectedCells[5].Value.ToString();
-                txtTeleFijo.Text = dataGridUsuarios.SelectedCells[7].Value.ToString();
-                txtUser.Text = dataGridUsuarios.SelectedCells[13].Value.ToString();
-                dropEstado.Text = dataGridUsuarios.SelectedCells[15].Value.ToString();
-                dropSupAdmin.Text = dataGridUsuarios.SelectedCells[12].Value.ToString();
-                dropTipoIdenti.Text = dataGridUsuarios.SelectedCells[4].Value.ToString();
+                lblId.Text = dataGridUsuarios.SelectedCells[1].Value?.ToString();
+                txtApellidos.Text = dataGridUsuarios.SelectedCells[2].Value?.ToString();
+                txtCelular.Text = dataGridUsuarios.SelectedCells[8].Value?.ToString();
+                txtDireccion.Text = dataGridUsuarios.SelectedCells[11].Value?.ToString();
+                txtEmail.Text = dataGridUsuarios.SelectedCells[9].Value?.ToString();
+                txtNombCli.Text = dataGridUsuarios.SelectedCells[3].Value?.ToString();
+                txtNumIden.Text = dataGridUsuarios.SelectedCells[5].Value?.ToString();
+                txtTeleFijo.Text = dataGridUsuarios.SelectedCells[7].Value?.ToString();
+                txtUser.Text = dataGridUsuarios.SelectedCells[13].Value?.ToString();
+                dropEstado.Text = dataGridUsuarios.SelectedCells[15].Value?.ToString();
+                dropSupAdmin.Text = dataGridUsuarios.SelectedCells[12].Value?.ToString();
+                dropTipoIdenti.Text = dataGridUsuarios.SelectedCells[4].Value?.ToString();
                 dateFecNac.Value = Convert.ToDateTime(dataGridUsuarios.SelectedCells[6].Value);
+
+                if (txtNombCli.Text == "Admin" || txtApellidos.Text == "Admin")
+                {
+                    txtApellidos.Enabled = false;
+                    txtNombCli.Enabled = false;
+                    txtUser.Enabled = false;
+                }
             }
             catch (Exception ex)
             {

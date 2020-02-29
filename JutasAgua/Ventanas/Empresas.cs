@@ -85,15 +85,15 @@ namespace JutasAgua.Ventanas
         {
             panelEmpresa.Visible = true;
 
-            lblId.Text = dataGridEmpresas.SelectedCells[0].Value.ToString();
-            txtNombreEmpre.Text = dataGridEmpresas.SelectedCells[1].Value.ToString();
-            txtEmail.Text = dataGridEmpresas.SelectedCells[2].Value.ToString();
-            txtDirecc.Text = dataGridEmpresas.SelectedCells[3].Value.ToString();
-            lblLogo.Text = dataGridEmpresas.SelectedCells[4].Value.ToString();
-            txtTelefonoFijo.Text = dataGridEmpresas.SelectedCells[5].Value.ToString();
-            txtTelefonoCel.Text = dataGridEmpresas.SelectedCells[6].Value.ToString();
-            txtRecaudador.Text = dataGridEmpresas.SelectedCells[7].Value.ToString();
-            txtRuc.Text = dataGridEmpresas.SelectedCells[8].Value.ToString();
+            lblId.Text = dataGridEmpresas.SelectedCells[0].Value?.ToString();
+            txtNombreEmpre.Text = dataGridEmpresas.SelectedCells[1]?.Value.ToString();
+            txtEmail.Text = dataGridEmpresas.SelectedCells[2].Value?.ToString();
+            txtDirecc.Text = dataGridEmpresas.SelectedCells[3].Value?.ToString();
+            lblLogo.Text = dataGridEmpresas.SelectedCells[4].Value?.ToString();
+            txtTelefonoFijo.Text = dataGridEmpresas.SelectedCells[5].Value?.ToString();
+            txtTelefonoCel.Text = dataGridEmpresas.SelectedCells[6].Value?.ToString();
+            txtRecaudador.Text = dataGridEmpresas.SelectedCells[7].Value?.ToString();
+            txtRuc.Text = dataGridEmpresas.SelectedCells[8].Value?.ToString();
 
             dropFactu.Text = dataGridEmpresas.SelectedCells[9].Value == null ? "" : dataGridEmpresas.SelectedCells[9].Value.ToString();
             lblcci.Text = dataGridEmpresas.SelectedCells[10].Value == null ? "" : dataGridEmpresas.SelectedCells[10].Value.ToString();
