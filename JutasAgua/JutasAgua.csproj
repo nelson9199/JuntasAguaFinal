@@ -131,6 +131,18 @@
     <Compile Include="Ventanas\Empresas.Designer.cs">
       <DependentUpon>Empresas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ventanas\Gurpo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventanas\Gurpo.Designer.cs">
+      <DependentUpon>Gurpo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\Impuesto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventanas\Impuesto.Designer.cs">
+      <DependentUpon>Impuesto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventanas\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +163,12 @@
     <Compile Include="Ventanas\Medidores.Designer.cs">
       <DependentUpon>Medidores.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ventanas\Multas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventanas\Multas.Designer.cs">
+      <DependentUpon>Multas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventanas\PagPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +180,12 @@
     </Compile>
     <Compile Include="Ventanas\Tarifas.Designer.cs">
       <DependentUpon>Tarifas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\Unidades_Medida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventanas\Unidades_Medida.Designer.cs">
+      <DependentUpon>Unidades_Medida.cs</DependentUpon>
     </Compile>
     <Compile Include="Ventanas\Usuarios.cs">
       <SubType>Form</SubType>
@@ -177,6 +201,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ventanas\Empresas.resx">
       <DependentUpon>Empresas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventanas\Gurpo.resx">
+      <DependentUpon>Gurpo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventanas\Impuesto.resx">
+      <DependentUpon>Impuesto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventanas\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -196,11 +226,17 @@
     <EmbeddedResource Include="Ventanas\Medidores.resx">
       <DependentUpon>Medidores.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ventanas\Multas.resx">
+      <DependentUpon>Multas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ventanas\PagPrincipal.resx">
       <DependentUpon>PagPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventanas\Tarifas.resx">
       <DependentUpon>Tarifas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventanas\Unidades_Medida.resx">
+      <DependentUpon>Unidades_Medida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventanas\Usuarios.resx">
       <DependentUpon>Usuarios.cs</DependentUpon>

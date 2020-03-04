@@ -349,7 +349,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tiempo_espera" Type="int" Nullable="false" />
           <Property Name="porcentaje_pago" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="valor_multa" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="cci" Type="int" />
           <Property Name="ccd" Type="datetime" Precision="0" />
           <Property Name="cwi" Type="int" />
@@ -1513,7 +1512,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tiempo_espera" Type="Int32" Nullable="false" />
           <Property Name="porcentaje_pago" Type="Decimal" Nullable="false" />
-          <Property Name="valor_multa" Type="Decimal" Nullable="false" />
           <Property Name="cci" Type="Int32" />
           <Property Name="ccd" Type="DateTime" />
           <Property Name="cwi" Type="Int32" />
@@ -2629,7 +2627,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tiempo_espera" ColumnName="tiempo_espera" />
                 <ScalarProperty Name="porcentaje_pago" ColumnName="porcentaje_pago" />
-                <ScalarProperty Name="valor_multa" ColumnName="valor_multa" />
                 <ScalarProperty Name="cci" ColumnName="cci" />
                 <ScalarProperty Name="ccd" ColumnName="ccd" />
                 <ScalarProperty Name="cwi" ColumnName="cwi" />

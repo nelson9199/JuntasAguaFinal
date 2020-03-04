@@ -156,7 +156,7 @@ namespace JutasAgua.Ventanas
 
         private void bunifuButton1_Click(object sender, EventArgs e)
         {
-            medidores = new Medidores(Convert.ToInt32(lblId.Text));
+            medidores = new Medidores(Convert.ToInt32(lblId.Text), txtNombCli.Text);
 
             medidores.ShowDialog();
 

@@ -191,7 +191,6 @@
     <Compile Include="unidad_medida.cs">
       <DependentUpon>hydros_model.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
     <Compile Include="usuario.cs">
       <DependentUpon>hydros_model.tt</DependentUpon>
     </Compile>

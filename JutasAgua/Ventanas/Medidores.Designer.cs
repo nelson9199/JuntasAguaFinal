@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Medidores));
             Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox.StateProperties stateProperties1 = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox.StateProperties stateProperties2 = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox.StateProperties();
@@ -98,16 +99,21 @@
             this.lblFoto = new System.Windows.Forms.Label();
             this.lblcwi = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
+            this.lblIdMarca = new System.Windows.Forms.Label();
+            this.lblIdTarifa = new System.Windows.Forms.Label();
+            this.lblIdBarrio = new System.Windows.Forms.Label();
             this.lblccd = new System.Windows.Forms.Label();
             this.lblcci = new System.Windows.Forms.Label();
             this.btnVolver = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.btnGuardarCambios = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.btnGuardar = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMedidores)).BeginInit();
             this.panel2.SuspendLayout();
             this.panelMedidior.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -317,7 +323,7 @@
             // 
             this.lblMedidorUser.AutoSize = true;
             this.lblMedidorUser.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMedidorUser.Location = new System.Drawing.Point(286, 27);
+            this.lblMedidorUser.Location = new System.Drawing.Point(275, 27);
             this.lblMedidorUser.Name = "lblMedidorUser";
             this.lblMedidorUser.Size = new System.Drawing.Size(0, 28);
             this.lblMedidorUser.TabIndex = 0;
@@ -340,7 +346,6 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.dataGridMedidores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridMedidores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridMedidores.BackgroundColor = System.Drawing.Color.White;
             this.dataGridMedidores.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridMedidores.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
@@ -396,6 +401,8 @@
             this.dataGridMedidores.Size = new System.Drawing.Size(1457, 621);
             this.dataGridMedidores.TabIndex = 2;
             this.dataGridMedidores.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Light;
+            this.dataGridMedidores.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMedidores_CellClick);
+            this.dataGridMedidores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMedidores_CellDoubleClick);
             // 
             // eliminar
             // 
@@ -405,6 +412,7 @@
             this.eliminar.MinimumWidth = 6;
             this.eliminar.Name = "eliminar";
             this.eliminar.ReadOnly = true;
+            this.eliminar.Width = 1457;
             // 
             // panel2
             // 
@@ -551,6 +559,7 @@
             this.dropEstado.Size = new System.Drawing.Size(269, 32);
             this.dropEstado.TabIndex = 16;
             this.dropEstado.Text = null;
+            this.dropEstado.SelectedIndexChanged += new System.EventHandler(this.dropEstado_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -890,17 +899,14 @@
             this.dropTarifa.ItemHeight = 26;
             this.dropTarifa.ItemHighLightColor = System.Drawing.Color.LightBlue;
             this.dropTarifa.Items.AddRange(new object[] {
-            "",
-            "Nombre",
-            "Cedula",
-            "Direccion"});
+            "Seleccione..."});
             this.dropTarifa.Location = new System.Drawing.Point(433, 77);
             this.dropTarifa.Margin = new System.Windows.Forms.Padding(4);
             this.dropTarifa.Name = "dropTarifa";
             this.dropTarifa.Size = new System.Drawing.Size(260, 32);
             this.dropTarifa.TabIndex = 11;
             this.dropTarifa.Text = null;
-            this.dropTarifa.SelectedIndexChanged += new System.EventHandler(this.bunifuDropdown2_SelectedIndexChanged);
+            this.dropTarifa.SelectedIndexChanged += new System.EventHandler(this.dropTarifa_SelectedIndexChanged);
             // 
             // dropMarca
             // 
@@ -928,17 +934,14 @@
             this.dropMarca.ItemHeight = 26;
             this.dropMarca.ItemHighLightColor = System.Drawing.Color.LightBlue;
             this.dropMarca.Items.AddRange(new object[] {
-            "",
-            "Nombre",
-            "Cedula",
-            "Direccion"});
+            "Seleccione..."});
             this.dropMarca.Location = new System.Drawing.Point(798, 77);
             this.dropMarca.Margin = new System.Windows.Forms.Padding(4);
             this.dropMarca.Name = "dropMarca";
             this.dropMarca.Size = new System.Drawing.Size(259, 32);
             this.dropMarca.TabIndex = 11;
             this.dropMarca.Text = null;
-            this.dropMarca.SelectedIndexChanged += new System.EventHandler(this.bunifuDropdown2_SelectedIndexChanged);
+            this.dropMarca.SelectedIndexChanged += new System.EventHandler(this.dropMarca_SelectedIndexChanged);
             // 
             // dropBarrio
             // 
@@ -966,16 +969,14 @@
             this.dropBarrio.ItemHeight = 26;
             this.dropBarrio.ItemHighLightColor = System.Drawing.Color.LightBlue;
             this.dropBarrio.Items.AddRange(new object[] {
-            "",
-            "Nombre",
-            "Cedula",
-            "Direccion"});
+            "Seleccione..."});
             this.dropBarrio.Location = new System.Drawing.Point(51, 77);
             this.dropBarrio.Margin = new System.Windows.Forms.Padding(4);
             this.dropBarrio.Name = "dropBarrio";
             this.dropBarrio.Size = new System.Drawing.Size(270, 32);
             this.dropBarrio.TabIndex = 11;
             this.dropBarrio.Text = null;
+            this.dropBarrio.SelectedIndexChanged += new System.EventHandler(this.dropBarrio_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -1035,9 +1036,12 @@
             this.panel3.Controls.Add(this.lblFoto);
             this.panel3.Controls.Add(this.lblcwi);
             this.panel3.Controls.Add(this.lblId);
+            this.panel3.Controls.Add(this.lblIdMarca);
+            this.panel3.Controls.Add(this.lblIdTarifa);
+            this.panel3.Controls.Add(this.lblIdBarrio);
             this.panel3.Controls.Add(this.lblccd);
             this.panel3.Controls.Add(this.lblcci);
-            this.panel3.Location = new System.Drawing.Point(25, 112);
+            this.panel3.Location = new System.Drawing.Point(51, 368);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 10);
@@ -1082,6 +1086,36 @@
             this.lblId.Size = new System.Drawing.Size(54, 17);
             this.lblId.TabIndex = 4;
             this.lblId.Text = "label12";
+            // 
+            // lblIdMarca
+            // 
+            this.lblIdMarca.AutoSize = true;
+            this.lblIdMarca.Location = new System.Drawing.Point(216, 42);
+            this.lblIdMarca.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblIdMarca.Name = "lblIdMarca";
+            this.lblIdMarca.Size = new System.Drawing.Size(54, 17);
+            this.lblIdMarca.TabIndex = 4;
+            this.lblIdMarca.Text = "label12";
+            // 
+            // lblIdTarifa
+            // 
+            this.lblIdTarifa.AutoSize = true;
+            this.lblIdTarifa.Location = new System.Drawing.Point(194, 73);
+            this.lblIdTarifa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblIdTarifa.Name = "lblIdTarifa";
+            this.lblIdTarifa.Size = new System.Drawing.Size(54, 17);
+            this.lblIdTarifa.TabIndex = 4;
+            this.lblIdTarifa.Text = "label12";
+            // 
+            // lblIdBarrio
+            // 
+            this.lblIdBarrio.AutoSize = true;
+            this.lblIdBarrio.Location = new System.Drawing.Point(179, 17);
+            this.lblIdBarrio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblIdBarrio.Name = "lblIdBarrio";
+            this.lblIdBarrio.Size = new System.Drawing.Size(54, 17);
+            this.lblIdBarrio.TabIndex = 4;
+            this.lblIdBarrio.Text = "label12";
             // 
             // lblccd
             // 
@@ -1233,6 +1267,7 @@
             this.btnGuardarCambios.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnGuardarCambios.TextMarginLeft = 0;
             this.btnGuardarCambios.UseDefaultRadiusAndThickness = true;
+            this.btnGuardarCambios.Click += new System.EventHandler(this.btnGuardarCambios_Click);
             // 
             // btnGuardar
             // 
@@ -1298,6 +1333,11 @@
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnGuardar.TextMarginLeft = 0;
             this.btnGuardar.UseDefaultRadiusAndThickness = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // Medidores
             // 
@@ -1320,6 +1360,7 @@
             this.panelMedidior.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1365,5 +1406,9 @@
         private System.Windows.Forms.Label label11;
         private Bunifu.UI.WinForms.BunifuDatePicker dateFecRetiro;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblIdMarca;
+        private System.Windows.Forms.Label lblIdTarifa;
+        private System.Windows.Forms.Label lblIdBarrio;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

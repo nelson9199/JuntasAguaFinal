@@ -18,6 +18,9 @@ namespace JutasAgua.Ventanas
         Marcas formMarcas = null;
         Barrio formBarrio = null;
         Tarifas tarifas = null;
+        Multas multas = null;
+        Gurpo gurpo = null;
+        Impuesto impuesto = null;
 
         public PagPrincipal()
         {
@@ -173,6 +176,65 @@ namespace JutasAgua.Ventanas
         private void CerrarFormaTarifas(object sender, FormClosedEventArgs e)
         {
             tarifas = null;
+        }
+
+        private void multasRetrasoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (multas == null)
+            {
+                multas = new Multas();
+                multas.MdiParent = this;
+                multas.FormClosed += new FormClosedEventHandler(CerrarFormaMultas);
+                multas.Show();
+            }
+            else
+            {
+                multas.Activate();
+            }
+        }
+
+        private void CerrarFormaMultas(object sender, FormClosedEventArgs e)
+        {
+            multas = null;
+        }
+
+        private void grupoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (gurpo == null)
+            {
+                gurpo = new Gurpo();
+                gurpo.MdiParent = this;
+                gurpo.FormClosed += new FormClosedEventHandler(CerrarFormaGrupo);
+                gurpo.Show();
+            }
+            else
+            {
+                gurpo.Activate();
+            }
+        }
+
+        private void CerrarFormaGrupo(object sender, FormClosedEventArgs e)
+        {
+            gurpo = null;
+        }
+
+        private void impuestoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (impuesto == null)
+            {
+                impuesto = new Impuesto();
+                impuesto.MdiParent = this;
+                impuesto.FormClosed += new FormClosedEventHandler(CerrarFormaImpuesto);
+                impuesto.Show();
+            }
+            else
+            {
+                impuesto.Activate();
+            }
+        }
+        private void CerrarFormaImpuesto(object sender, FormClosedEventArgs e)
+        {
+            impuesto = null;
         }
 
     }

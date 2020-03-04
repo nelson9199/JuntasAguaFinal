@@ -1,8 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Data.DataSet;
 
@@ -273,6 +275,16 @@ namespace Modelos
             }
         }
 
+        public async Task<tarifa> ObtenerTarifaPorNombre(string nombre)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var tarifa = await contexto.tarifa.FirstOrDefaultAsync(t => t.nombreT == nombre);
+
+                return tarifa;
+            }
+
+        }
 
 
         //Tabla cliente
@@ -390,6 +402,8 @@ namespace Modelos
                     on m.barrio_id equals b.id
                     join t in contexto.tarifa
                     on m.tarifa_id equals t.id
+                    join mar in contexto.marca
+                    on m.marca_id equals mar.id
                     where m.cliente_id == numCli
                     select new ConsultaMedidores
                     {
@@ -397,9 +411,15 @@ namespace Modelos
                         nombreM = m.nombreM,
                         nombreB = b.nombreB,
                         NombreT = t.nombreT,
+                        NombreMarca = mar.nombre,
                         serie = m.serie,
                         lectura_inicial = m.lectura_inicial,
-                        estado = m.estado
+                        estado = m.estado,
+                        numB = m.barrio_id,
+                        numM = m.marca_id,
+                        numT = m.tarifa_id,
+                        fecha_ingreso = m.fecha_ingreso,
+                        fecha_retiro = m.fecha_retiro
                     };
 
 
@@ -411,8 +431,42 @@ namespace Modelos
         {
             using (var contexto = new ipwebec_hydrosEntities())
             {
-                IEnumerable<medidor> medidor = contexto.medidor.Where(m => m.cliente_id == id);
+                IEnumerable<medidor> medidor = contexto.medidor.Where(m => m.id == id);
                 contexto.medidor.RemoveRange(medidor);
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
+            }
+        }
+
+        public bool InsertarMedidor(medidor nuevoMedidor)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                contexto.medidor.Add(nuevoMedidor);
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
+            }
+        }
+        public bool ActualizarMedidior(medidor nuevoMedidor)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var updatedMedidor = contexto.medidor.First(b => b.id == nuevoMedidor.id);
+
+                updatedMedidor.barrio_id = nuevoMedidor.barrio_id;
+                updatedMedidor.cliente_id = nuevoMedidor.cliente_id;
+                updatedMedidor.estado = nuevoMedidor.estado;
+                updatedMedidor.fecha_ingreso = nuevoMedidor.fecha_ingreso;
+                updatedMedidor.fecha_retiro = nuevoMedidor.fecha_retiro;
+                updatedMedidor.lectura_inicial = nuevoMedidor.lectura_inicial;
+                updatedMedidor.marca_id = nuevoMedidor.marca_id;
+                updatedMedidor.nombreM = nuevoMedidor.nombreM;
+                updatedMedidor.serie = nuevoMedidor.serie;
+                updatedMedidor.tarifa_id = nuevoMedidor.tarifa_id;
 
                 int affected = contexto.SaveChanges();
 
@@ -431,6 +485,17 @@ namespace Modelos
 
                 return marcas.ToList();
             }
+        }
+
+        public async Task<marca> ObtenerMarcaPorNombre(string nombre)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var marca = await contexto.marca.FirstOrDefaultAsync(x => x.nombre == nombre);
+
+                return marca;
+            }
+
         }
 
         public bool InsertarMarca(marca nuevaMarca)
@@ -481,6 +546,18 @@ namespace Modelos
             }
         }
 
+        public async Task<barrio> ObtenerBarrioPorNombre(string nombre)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var barrio = await contexto.barrio.FirstOrDefaultAsync(x => x.nombreB == nombre);
+
+                return barrio;
+            }
+
+        }
+
+
         public bool InsertarBarrio(barrio barrio)
         {
             using (var contexto = new ipwebec_hydrosEntities())
@@ -519,6 +596,156 @@ namespace Modelos
                 return (affected == 1);
             }
         }
+
+        //tabla multa
+        public async Task<List<multa_retraso>> ObtenerMultas()
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var multas = await contexto.multa_retraso.Select(x => x).ToListAsync();
+
+                return multas;
+            }
+        }
+        public bool InsertarMultas(multa_retraso nuevaMulta)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                contexto.multa_retraso.Add(nuevaMulta);
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
+            }
+        }
+
+        public bool ModificarMulta(multa_retraso nuevaMulta)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var updatedMulta = contexto.multa_retraso.First(b => b.id == nuevaMulta.id);
+
+                updatedMulta.tiempo_espera = nuevaMulta.tiempo_espera;
+                updatedMulta.porcentaje_pago = nuevaMulta.porcentaje_pago;
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
+            }
+        }
+
+        public bool EliminarMulta(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<multa_retraso> multa = contexto.multa_retraso.Where(b => b.id == id);
+                contexto.multa_retraso.RemoveRange(multa);
+
+                int affected = contexto.SaveChanges();
+
+                return (affected == 1);
+            }
+        }
+
+        //tabla grupo
+        public async Task<List<grupo>> ObtenerGrupo()
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var grupo = await contexto.grupo.Select(x => x).ToListAsync();
+
+                return grupo;
+            }
+        }
+        public async Task<bool> InsertarGrupo(grupo nuevoGrupo)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                contexto.grupo.Add(nuevoGrupo);
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        public async Task<bool> ModificarGrupo(grupo nuevoGrupo)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var updatedGrupo = contexto.grupo.First(b => b.id == nuevoGrupo.id);
+
+                updatedGrupo.codigo = nuevoGrupo.codigo;
+                updatedGrupo.nombre = nuevoGrupo.nombre;
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        public async Task<bool> EliminarGrupo(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<grupo> grupo = contexto.grupo.Where(b => b.id == id);
+                contexto.grupo.RemoveRange(grupo);
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        //tabla impuesto
+        public async Task<List<impuesto>> ObtenerImpuesto()
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var impuesto = await contexto.impuesto.Select(x => x).ToListAsync();
+
+                return impuesto;
+            }
+        }
+        public async Task<bool> InsertarImpuesto(impuesto nuevoImpuesto)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                contexto.impuesto.Add(nuevoImpuesto);
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        public async Task<bool> ModificarImpuesto(impuesto nuevoImpuesto)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var updatedImpuesto = contexto.impuesto.First(b => b.id == nuevoImpuesto.id);
+
+                updatedImpuesto.porcentaje = nuevoImpuesto.porcentaje;
+                updatedImpuesto.nombre = nuevoImpuesto.nombre;
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        public async Task<bool> EliminarImpuesto(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<impuesto> impuesto = contexto.impuesto.Where(b => b.id == id);
+                contexto.impuesto.RemoveRange(impuesto);
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
     }
 
     public partial class ConsultaMedidores
@@ -530,5 +757,11 @@ namespace Modelos
         public string serie { get; set; }
         public string lectura_inicial { get; set; }
         public string estado { get; set; }
+        public int numB { get; set; }
+        public int numM { get; set; }
+        public int numT { get; set; }
+        public Nullable<System.DateTime> fecha_ingreso { get; set; }
+        public Nullable<System.DateTime> fecha_retiro { get; set; }
+        public string NombreMarca { get; set; }
     }
 }

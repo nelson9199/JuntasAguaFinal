@@ -35,6 +35,8 @@
             this.multasRetrasoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.marcasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barrioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grupoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.impuestoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +70,9 @@
             this.tarifasToolStripMenuItem,
             this.multasRetrasoToolStripMenuItem,
             this.marcasToolStripMenuItem,
-            this.barrioToolStripMenuItem});
+            this.barrioToolStripMenuItem,
+            this.grupoToolStripMenuItem,
+            this.impuestoToolStripMenuItem});
             this.ajustesToolStripMenuItem.Name = "ajustesToolStripMenuItem";
             this.ajustesToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
             this.ajustesToolStripMenuItem.Text = "Ajustes";
@@ -92,6 +96,7 @@
             this.multasRetrasoToolStripMenuItem.Name = "multasRetrasoToolStripMenuItem";
             this.multasRetrasoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.multasRetrasoToolStripMenuItem.Text = "Multas Retraso";
+            this.multasRetrasoToolStripMenuItem.Click += new System.EventHandler(this.multasRetrasoToolStripMenuItem_Click);
             // 
             // marcasToolStripMenuItem
             // 
@@ -106,6 +111,20 @@
             this.barrioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.barrioToolStripMenuItem.Text = "Barrios";
             this.barrioToolStripMenuItem.Click += new System.EventHandler(this.barrioToolStripMenuItem_Click);
+            // 
+            // grupoToolStripMenuItem
+            // 
+            this.grupoToolStripMenuItem.Name = "grupoToolStripMenuItem";
+            this.grupoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.grupoToolStripMenuItem.Text = "Grupo";
+            this.grupoToolStripMenuItem.Click += new System.EventHandler(this.grupoToolStripMenuItem_Click);
+            // 
+            // impuestoToolStripMenuItem
+            // 
+            this.impuestoToolStripMenuItem.Name = "impuestoToolStripMenuItem";
+            this.impuestoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.impuestoToolStripMenuItem.Text = "Impuesto";
+            this.impuestoToolStripMenuItem.Click += new System.EventHandler(this.impuestoToolStripMenuItem_Click);
             // 
             // administraciónToolStripMenuItem
             // 
@@ -133,7 +152,7 @@
             // clientesToolStripMenuItem1
             // 
             this.clientesToolStripMenuItem1.Name = "clientesToolStripMenuItem1";
-            this.clientesToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.clientesToolStripMenuItem1.Size = new System.Drawing.Size(144, 26);
             this.clientesToolStripMenuItem1.Text = "Clientes";
             this.clientesToolStripMenuItem1.Click += new System.EventHandler(this.clientesToolStripMenuItem1_Click);
             // 
@@ -194,5 +213,7 @@
         private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem marcasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem barrioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem grupoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem impuestoToolStripMenuItem;
     }
 }
