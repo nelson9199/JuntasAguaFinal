@@ -21,6 +21,7 @@ namespace JutasAgua.Ventanas
         Multas multas = null;
         Gurpo gurpo = null;
         Impuesto impuesto = null;
+        Unidades_Medida medida = null;
 
         public PagPrincipal()
         {
@@ -237,5 +238,24 @@ namespace JutasAgua.Ventanas
             impuesto = null;
         }
 
+        private void unidadMedidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (medida == null)
+            {
+                medida = new Unidades_Medida();
+                medida.MdiParent = this;
+                medida.FormClosed += new FormClosedEventHandler(CerrarFormaMedida);
+                medida.Show();
+            }
+            else
+            {
+                medida.Activate();
+            }
+        }
+
+        private void CerrarFormaMedida(object sender, FormClosedEventArgs e)
+        {
+            medida = null;
+        }
     }
 }

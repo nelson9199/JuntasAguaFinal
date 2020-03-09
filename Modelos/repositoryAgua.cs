@@ -746,6 +746,56 @@ namespace Modelos
                 return (affected == 1);
             }
         }
+
+        //tabla unidad medida
+        public async Task<List<unidad_medida>> ObtenerMedida()
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var medida = await contexto.unidad_medida.Select(x => x).ToListAsync();
+
+                return medida;
+            }
+        }
+        public async Task<bool> InsertarMedida(unidad_medida nuevaMedida)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                contexto.unidad_medida.Add(nuevaMedida);
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        public async Task<bool> ModificarMedida(unidad_medida nuevaMedida)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var updatedImpuesto = contexto.unidad_medida.First(b => b.id == nuevaMedida.id);
+
+                updatedImpuesto.prefijo = nuevaMedida.prefijo;
+                updatedImpuesto.nombre = nuevaMedida.nombre;
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        public async Task<bool> EliminarMedida(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<unidad_medida> medida = contexto.unidad_medida.Where(b => b.id == id);
+                contexto.unidad_medida.RemoveRange(medida);
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
     }
 
     public partial class ConsultaMedidores
