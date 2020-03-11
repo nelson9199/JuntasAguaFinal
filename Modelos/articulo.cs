@@ -35,18 +35,19 @@ namespace Modelos
         public string numero { get; set; }
         public string codigo_auxiliar { get; set; }
         public string codigo_barras { get; set; }
-        public Nullable<int> numero_abreviacion { get; set; }
-        public Nullable<int> proveedor_preferente { get; set; }
+        public Nullable<sbyte> numero_abreviacion { get; set; }
+        public Nullable<sbyte> proveedor_preferente { get; set; }
         public string descripcion { get; set; }
-        public string foto { get; set; }
+        public byte[] foto { get; set; }
+        public string nombre_foto { get; set; }
         public Nullable<System.DateTime> fecha_creacion { get; set; }
         public string tiene_promocion { get; set; }
         public string visualizar_venta { get; set; }
         public string estado { get; set; }
         public string observacion_estado { get; set; }
         public string control_stock { get; set; }
-        public Nullable<sbyte> stock_minimo { get; set; }
-        public Nullable<sbyte> stock_actual { get; set; }
+        public Nullable<int> stock_minimo { get; set; }
+        public Nullable<int> stock_actual { get; set; }
         public Nullable<decimal> precio_compra { get; set; }
         public Nullable<decimal> precio_venta { get; set; }
         public Nullable<int> cci { get; set; }

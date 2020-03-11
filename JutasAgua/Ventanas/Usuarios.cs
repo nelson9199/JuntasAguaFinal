@@ -153,9 +153,9 @@ namespace JutasAgua.Ventanas
             {
                 var usuarioInsert = ObtenerDatosDelGridInsert();
 
-                List<usuario> usuarioLogeado = repository.hacerLogin(Login.user, Login.password);
-                usuarioInsert.cwi = usuarioLogeado[0].id;
-                usuarioInsert.cwd = DateTime.Now;
+                //List<usuario> usuarioLogeado = repository.hacerLogin(Login.user, Login.password);
+                //usuarioInsert.cwi = usuarioLogeado[0].id;
+                //usuarioInsert.cwd = DateTime.Now;
 
                 var isOK = repository.InsertUsuario(usuarioInsert);
 
@@ -231,7 +231,7 @@ namespace JutasAgua.Ventanas
                 dropTipoIdenti.Text = dataGridUsuarios.SelectedCells[4].Value?.ToString();
                 dateFecNac.Value = Convert.ToDateTime(dataGridUsuarios.SelectedCells[6].Value);
 
-                if (txtNombCli.Text == "Admin" || txtApellidos.Text == "Admin")
+                if (txtNombCli.Text == "ADMIN" || txtApellidos.Text == "ADMIN")
                 {
                     txtApellidos.Enabled = false;
                     txtNombCli.Enabled = false;

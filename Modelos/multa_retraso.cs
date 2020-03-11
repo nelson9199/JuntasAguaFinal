@@ -17,6 +17,7 @@ namespace Modelos
         public int id { get; set; }
         public int tiempo_espera { get; set; }
         public decimal porcentaje_pago { get; set; }
+        public decimal valor_multa { get; set; }
         public Nullable<int> cci { get; set; }
         public Nullable<System.DateTime> ccd { get; set; }
         public Nullable<int> cwi { get; set; }

@@ -13,7 +13,7 @@ namespace JutasAgua.Ventanas
 {
     public partial class Multas : Form
     {
-        RepositoryAgua repository = new RepositoryAgua();
+        readonly RepositoryAgua repository = new RepositoryAgua();
 
         public Multas()
         {

@@ -27,18 +27,19 @@
           <Property Name="numero" Type="varchar" MaxLength="10" />
           <Property Name="codigo_auxiliar" Type="varchar" MaxLength="45" />
           <Property Name="codigo_barras" Type="varchar" MaxLength="45" />
-          <Property Name="numero_abreviacion" Type="int" />
-          <Property Name="proveedor_preferente" Type="int" />
+          <Property Name="numero_abreviacion" Type="tinyint" />
+          <Property Name="proveedor_preferente" Type="tinyint" />
           <Property Name="descripcion" Type="varchar" MaxLength="1000" />
-          <Property Name="foto" Type="varchar" MaxLength="100" />
+          <Property Name="foto" Type="varbinary" MaxLength="4500" />
+          <Property Name="nombre_foto" Type="varchar" MaxLength="4500" />
           <Property Name="fecha_creacion" Type="date" />
           <Property Name="tiene_promocion" Type="enum" />
           <Property Name="visualizar_venta" Type="enum" />
           <Property Name="estado" Type="enum" />
           <Property Name="observacion_estado" Type="varchar" MaxLength="45" />
           <Property Name="control_stock" Type="enum" />
-          <Property Name="stock_minimo" Type="tinyint" />
-          <Property Name="stock_actual" Type="tinyint" />
+          <Property Name="stock_minimo" Type="int" />
+          <Property Name="stock_actual" Type="int" />
           <Property Name="precio_compra" Type="decimal" Precision="10" Scale="2" />
           <Property Name="precio_venta" Type="decimal" Precision="10" Scale="2" />
           <Property Name="cci" Type="int" />
@@ -67,7 +68,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombreB" Type="varchar" MaxLength="100" />
+          <Property Name="nombreB" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="cci" Type="int" />
           <Property Name="ccd" Type="varchar" MaxLength="45" />
           <Property Name="cwi" Type="int" />
@@ -349,6 +350,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tiempo_espera" Type="int" Nullable="false" />
           <Property Name="porcentaje_pago" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="valor_multa" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="cci" Type="int" />
           <Property Name="ccd" Type="datetime" Precision="0" />
           <Property Name="cwi" Type="int" />
@@ -395,13 +397,13 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="orden" Type="int" Nullable="false" />
-          <Property Name="nombreT" Type="varchar" MaxLength="100" />
+          <Property Name="nombreT" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="descripcion" Type="text" />
           <Property Name="cci" Type="int" />
           <Property Name="ccd" Type="datetime" Precision="0" />
           <Property Name="cwi" Type="int" />
           <Property Name="cwd" Type="datetime" Precision="0" />
-          <Property Name="acumulativa" Type="char" MaxLength="2" />
+          <Property Name="acumulativa" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="tipo_comprobante">
           <Key>
@@ -444,13 +446,13 @@
           <Property Name="direccion" Type="varchar" MaxLength="255" />
           <Property Name="es_superadmin" Type="enum" />
           <Property Name="usuario" Type="varchar" MaxLength="45" />
-          <Property Name="clave" Type="varchar" MaxLength="255" />
+          <Property Name="clave" Type="varchar" MaxLength="4500" />
           <Property Name="estado" Type="enum" />
           <Property Name="cci" Type="int" />
           <Property Name="ccd" Type="datetime" Precision="0" />
           <Property Name="cwi" Type="int" />
           <Property Name="cwd" Type="datetime" Precision="0" />
-          <Property Name="salt" Type="varchar" MaxLength="2000" />
+          <Property Name="salt" Type="varchar" MaxLength="4500" />
         </EntityType>
         <EntityType Name="usuario_perfil">
           <Key>
@@ -1136,18 +1138,19 @@
           <Property Name="numero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="codigo_auxiliar" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="codigo_barras" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="numero_abreviacion" Type="Int32" />
-          <Property Name="proveedor_preferente" Type="Int32" />
+          <Property Name="numero_abreviacion" Type="SByte" />
+          <Property Name="proveedor_preferente" Type="SByte" />
           <Property Name="descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="foto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="nombre_foto" Type="String" MaxLength="4500" FixedLength="false" Unicode="false" />
           <Property Name="fecha_creacion" Type="DateTime" />
           <Property Name="tiene_promocion" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Name="visualizar_venta" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Name="observacion_estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="control_stock" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
-          <Property Name="stock_minimo" Type="SByte" />
-          <Property Name="stock_actual" Type="SByte" />
+          <Property Name="stock_minimo" Type="Int32" />
+          <Property Name="stock_actual" Type="Int32" />
           <Property Name="precio_compra" Type="Decimal" />
           <Property Name="precio_venta" Type="Decimal" />
           <Property Name="cci" Type="Int32" />
@@ -1189,7 +1192,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombreB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nombreB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="cci" Type="Int32" />
           <Property Name="ccd" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="cwi" Type="Int32" />
@@ -1512,6 +1515,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tiempo_espera" Type="Int32" Nullable="false" />
           <Property Name="porcentaje_pago" Type="Decimal" Nullable="false" />
+          <Property Name="valor_multa" Type="Decimal" Nullable="false" />
           <Property Name="cci" Type="Int32" />
           <Property Name="ccd" Type="DateTime" />
           <Property Name="cwi" Type="Int32" />
@@ -1563,13 +1567,13 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="orden" Type="Int32" Nullable="false" />
-          <Property Name="nombreT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nombreT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="cci" Type="Int32" />
           <Property Name="ccd" Type="DateTime" />
           <Property Name="cwi" Type="Int32" />
           <Property Name="cwd" Type="DateTime" />
-          <Property Name="acumulativa" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="acumulativa" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="costo_tarifa" Relationship="Self.fk_costo_tarifa_tarifa1" FromRole="tarifa" ToRole="costo_tarifa" />
           <NavigationProperty Name="medidor" Relationship="Self.fk_medidor_tarifa2" FromRole="tarifa" ToRole="medidor" />
         </EntityType>
@@ -1618,13 +1622,13 @@
           <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="es_superadmin" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Name="usuario1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="clave" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" MaxLength="4500" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Name="cci" Type="Int32" />
           <Property Name="ccd" Type="DateTime" />
           <Property Name="cwi" Type="Int32" />
           <Property Name="cwd" Type="DateTime" />
-          <Property Name="salt" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="salt" Type="String" MaxLength="4500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="lectura" Relationship="Self.fk_lectura_usuario1" FromRole="usuario" ToRole="lectura" />
           <NavigationProperty Name="perfil" Relationship="Self.usuario_perfil" FromRole="usuario" ToRole="perfil" />
         </EntityType>
@@ -2287,6 +2291,7 @@
                 <ScalarProperty Name="proveedor_preferente" ColumnName="proveedor_preferente" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="nombre_foto" ColumnName="nombre_foto" />
                 <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
                 <ScalarProperty Name="tiene_promocion" ColumnName="tiene_promocion" />
                 <ScalarProperty Name="visualizar_venta" ColumnName="visualizar_venta" />
@@ -2627,6 +2632,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tiempo_espera" ColumnName="tiempo_espera" />
                 <ScalarProperty Name="porcentaje_pago" ColumnName="porcentaje_pago" />
+                <ScalarProperty Name="valor_multa" ColumnName="valor_multa" />
                 <ScalarProperty Name="cci" ColumnName="cci" />
                 <ScalarProperty Name="ccd" ColumnName="ccd" />
                 <ScalarProperty Name="cwi" ColumnName="cwi" />

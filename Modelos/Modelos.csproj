@@ -81,131 +81,131 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="actividad.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="articulo.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="asistencia.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="barrio.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="categoria_menu.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="cliente.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="costo_tarifa.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="detalle_asistencia.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="detalle_ingreso.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="detalle_kardex.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="detalle_venta.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="empleado.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="empresa.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="forma_pago.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="grupo.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="hydros_model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>hydros_model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="hydros_model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>hydros_model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="hydros_model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>hydros_model.edmx</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="impuesto.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="ingreso.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="kardex.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="lectura.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="marca.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="medidor.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="menu.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="mes.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="modelo.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>modelo.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="modelo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="modelo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>modelo.edmx</DependentUpon>
     </Compile>
     <Compile Include="multa_retraso.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="perfil.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="perfil_menu.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protector.cs" />
     <Compile Include="proveedor.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="RepositoryAgua.cs" />
     <Compile Include="tarifa.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="tipo_comprobante.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="ubicacion.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="unidad_medida.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="usuario.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="venta.cs">
-      <DependentUpon>hydros_model.tt</DependentUpon>
+      <DependentUpon>modelo.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="hydros_model.edmx">
+    <EntityDeploy Include="modelo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>hydros_model.Designer.cs</LastGenOutput>
+      <LastGenOutput>modelo.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="hydros_model.edmx.diagram">
-      <DependentUpon>hydros_model.edmx</DependentUpon>
+    <None Include="modelo.edmx.diagram">
+      <DependentUpon>modelo.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -213,15 +213,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="hydros_model.Context.tt">
+    <Content Include="modelo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>hydros_model.edmx</DependentUpon>
-      <LastGenOutput>hydros_model.Context.cs</LastGenOutput>
+      <DependentUpon>modelo.edmx</DependentUpon>
+      <LastGenOutput>modelo.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="hydros_model.tt">
+    <Content Include="modelo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>hydros_model.edmx</DependentUpon>
-      <LastGenOutput>hydros_model.cs</LastGenOutput>
+      <DependentUpon>modelo.edmx</DependentUpon>
+      <LastGenOutput>modelo.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

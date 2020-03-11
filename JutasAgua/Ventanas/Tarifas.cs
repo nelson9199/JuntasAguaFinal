@@ -13,7 +13,8 @@ namespace JutasAgua.Ventanas
 {
     public partial class Tarifas : Form
     {
-        RepositoryAgua repository = new RepositoryAgua();
+        readonly RepositoryAgua repository = new RepositoryAgua();
+        private Costp_Ta costpTa = null;
 
         public Tarifas()
         {
@@ -64,6 +65,7 @@ namespace JutasAgua.Ventanas
             txtDescripcion.Text = "";
             txtNombTa.Text = "";
             txtOrden.Text = "";
+            btnCosto.Enabled = false;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -120,7 +122,7 @@ namespace JutasAgua.Ventanas
             panelTarifa.Visible = true;
             btnGuardar.Enabled = false;
             btnGuardarCambios.Enabled = true;
-
+            btnCosto.Enabled = true;
             txtDescripcion.Text = dataGridTarifa.SelectedCells[4].Value?.ToString();
             txtNombTa.Text = dataGridTarifa.SelectedCells[3].Value?.ToString();
             txtOrden.Text = dataGridTarifa.SelectedCells[2].Value?.ToString();
@@ -218,5 +220,15 @@ namespace JutasAgua.Ventanas
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnVerMedidor_Click(object sender, EventArgs e)
+        {
+            costpTa = new Costp_Ta(Convert.ToInt32(lblId.Text));
+            costpTa.Show();
+            costpTa.WindowState = FormWindowState.Normal;
+
+        }
+
     }
+
 }

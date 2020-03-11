@@ -27,13 +27,17 @@ namespace JutasAgua.Ventanas
 
                 var empresa = repository.obtenerEmpresas();
 
-                if (empresa[0].facturacion == "F")
+                if (empresa.Count > 0)
                 {
-                    empresa[0].facturacion = "Facturación";
-                }
-                else if (empresa[0].facturacion == "R")
-                {
-                    empresa[0].facturacion = "Recibo";
+                    switch (empresa[0].facturacion)
+                    {
+                        case "F":
+                            empresa[0].facturacion = "Facturación";
+                            break;
+                        case "R":
+                            empresa[0].facturacion = "Recibo";
+                            break;
+                    }
                 }
 
                 dataGridEmpresas.DataSource = empresa;
@@ -137,9 +141,9 @@ namespace JutasAgua.Ventanas
 
         private void btnGuardarCambios_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            empresa updateEmpresa = ObtenerEmpresas();
+            try
+            {
+                empresa updateEmpresa = ObtenerEmpresas();
 
             //llenar el cwi y cwd cuando se editan datos
             List<usuario> usuario = repository.hacerLogin(Login.user, Login.password);
@@ -157,14 +161,14 @@ namespace JutasAgua.Ventanas
             }
             else
             {
-                MessageBox.Show("No se ficarion datos");
+                MessageBox.Show("No se Modificarion datos");
             }
 
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
     }

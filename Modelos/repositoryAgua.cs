@@ -33,7 +33,7 @@ namespace Modelos
 
                     // re-generate the salted and hashed password 
                     var saltedhashedPassword = Protector.SaltAndHashPassword(
-                      clave, salt);
+                        clave, salt);
 
                     var usuarioVerificar =
                         from c in contexto.usuario
@@ -81,12 +81,12 @@ namespace Modelos
 
                 // re-generate the salted and hashed password 
                 var saltedhashedPassword = Protector.SaltAndHashPassword(
-                  clave, salt);
+                    clave, salt);
 
                 var usuario2 =
-                from c in contexto.usuario
-                where c.usuario1 == user && c.clave == saltedhashedPassword
-                select c;
+                    from c in contexto.usuario
+                    where c.usuario1 == user && c.clave == saltedhashedPassword
+                    select c;
 
                 return usuario.ToList();
 
@@ -109,7 +109,8 @@ namespace Modelos
         {
             using (var contexto = new ipwebec_hydrosEntities())
             {
-                (string encryptedPassword, string salt) = Protector.ObtenerEncryptedPassword(nuevoUsuario.clave, nuevoUsuario.usuario1);
+                (string encryptedPassword, string salt) =
+                    Protector.ObtenerEncryptedPassword(nuevoUsuario.clave, nuevoUsuario.usuario1);
 
                 nuevoUsuario.clave = encryptedPassword;
                 nuevoUsuario.salt = salt;
@@ -164,9 +165,9 @@ namespace Modelos
                 usuarioUpdate.usuario1 = nuevoUsuario.usuario1;
 
                 var usuario =
-                   from c in contexto.usuario
-                   where c.usuario1 == nuevoUsuario.usuario1
-                   select c;
+                    from c in contexto.usuario
+                    where c.usuario1 == nuevoUsuario.usuario1
+                    select c;
 
                 var usuariosList = usuario.ToList();
 
@@ -174,7 +175,7 @@ namespace Modelos
 
                 // re-generate the salted and hashed password 
                 var saltedhashedPassword = Protector.SaltAndHashPassword(
-                  nuevoUsuario.clave, salt);
+                    nuevoUsuario.clave, salt);
 
                 usuarioUpdate.clave = saltedhashedPassword;
 
@@ -370,6 +371,7 @@ namespace Modelos
                 return clientes.ToList();
             }
         }
+
         public List<cliente> BuscarClientePorCedula(string cedula)
         {
             using (var contexto = new ipwebec_hydrosEntities())
@@ -379,6 +381,7 @@ namespace Modelos
                 return clientes.ToList();
             }
         }
+
         public List<cliente> BuscarClientePorDireccion(string direccion)
         {
             using (var contexto = new ipwebec_hydrosEntities())
@@ -399,11 +402,11 @@ namespace Modelos
                 var usuario =
                     from m in contexto.medidor
                     join b in contexto.barrio
-                    on m.barrio_id equals b.id
+                        on m.barrio_id equals b.id
                     join t in contexto.tarifa
-                    on m.tarifa_id equals t.id
+                        on m.tarifa_id equals t.id
                     join mar in contexto.marca
-                    on m.marca_id equals mar.id
+                        on m.marca_id equals mar.id
                     where m.cliente_id == numCli
                     select new ConsultaMedidores
                     {
@@ -451,6 +454,7 @@ namespace Modelos
                 return (affected == 1);
             }
         }
+
         public bool ActualizarMedidior(medidor nuevoMedidor)
         {
             using (var contexto = new ipwebec_hydrosEntities())
@@ -508,6 +512,7 @@ namespace Modelos
                 return (affected == 1);
             }
         }
+
         public bool ModificarMarca(marca nuevaMarca)
         {
             using (var contexto = new ipwebec_hydrosEntities())
@@ -607,6 +612,7 @@ namespace Modelos
                 return multas;
             }
         }
+
         public bool InsertarMultas(multa_retraso nuevaMulta)
         {
             using (var contexto = new ipwebec_hydrosEntities())
@@ -657,6 +663,17 @@ namespace Modelos
                 return grupo;
             }
         }
+
+        public async Task<grupo> ObtenerGrupoPorNombre(string nombre)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var grupo = await contexto.grupo.FirstAsync(x => x.nombre == nombre);
+
+                return grupo;
+            }
+        }
+
         public async Task<bool> InsertarGrupo(grupo nuevoGrupo)
         {
             using (var contexto = new ipwebec_hydrosEntities())
@@ -707,6 +724,17 @@ namespace Modelos
                 return impuesto;
             }
         }
+
+        public async Task<impuesto> ObtenerImpuestoPorNombre(string nombre)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var impuesto = await contexto.impuesto.FirstAsync(x => x.nombre == nombre);
+
+                return impuesto;
+            }
+        }
+
         public async Task<bool> InsertarImpuesto(impuesto nuevoImpuesto)
         {
             using (var contexto = new ipwebec_hydrosEntities())
@@ -757,6 +785,17 @@ namespace Modelos
                 return medida;
             }
         }
+
+        public async Task<unidad_medida> ObtenerMedidaPorNombre(string nombre)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var medida = await contexto.unidad_medida.FirstAsync(x => x.nombre == nombre);
+
+                return medida;
+            }
+        }
+
         public async Task<bool> InsertarMedida(unidad_medida nuevaMedida)
         {
             using (var contexto = new ipwebec_hydrosEntities())
@@ -796,6 +835,164 @@ namespace Modelos
                 return (affected == 1);
             }
         }
+
+        //tabla articulo
+        public async Task<bool> InsertarArticulo(articulo nuevoArticulo)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                contexto.articulo.Add(nuevoArticulo);
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        public async Task<bool> ModificarArticulo(articulo nuevoArticulo)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var updatedArticulo = contexto.articulo.First(b => b.id == nuevoArticulo.id);
+
+                updatedArticulo.grupo_id = nuevoArticulo.grupo_id;
+                updatedArticulo.clase = nuevoArticulo.clase;
+                updatedArticulo.control_stock = nuevoArticulo.control_stock;
+                updatedArticulo.descripcion = nuevoArticulo.descripcion;
+                updatedArticulo.fecha_creacion = nuevoArticulo.fecha_creacion;
+                updatedArticulo.foto = nuevoArticulo.foto;
+                updatedArticulo.impuesto_id = nuevoArticulo.impuesto_id;
+                updatedArticulo.marca_id = nuevoArticulo.marca_id;
+                updatedArticulo.nombre_completo = nuevoArticulo.nombre_completo;
+                updatedArticulo.nombre_corto = nuevoArticulo.nombre_corto;
+                updatedArticulo.nombre_foto = nuevoArticulo.nombre_foto;
+                updatedArticulo.precio_compra = nuevoArticulo.precio_compra;
+                updatedArticulo.precio_venta = nuevoArticulo.precio_venta;
+                updatedArticulo.stock_actual = nuevoArticulo.stock_actual;
+                updatedArticulo.stock_minimo = nuevoArticulo.stock_minimo;
+                updatedArticulo.unidad_medida_id = nuevoArticulo.unidad_medida_id;
+
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        public async Task<bool> EliminarArticulo(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<articulo> articulo = contexto.articulo.Where(b => b.id == id);
+                contexto.articulo.RemoveRange(articulo);
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        public async Task<List<ConsultarArticulos>> ObtenerArticulo()
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var articulo =
+                    // ReSharper disable once ComplexConditionExpression
+                    from a in contexto.articulo
+                    join g in contexto.grupo
+                        on a.grupo_id equals g.id
+                    join m in contexto.marca
+                        on a.marca_id equals m.id
+                    join u in contexto.unidad_medida
+                        on a.unidad_medida_id equals u.id
+                    join i in contexto.impuesto
+                        on a.impuesto_id equals i.id
+                    select new ConsultarArticulos
+                    {
+                        id = a.id,
+                        grupo_id = g.id,
+                        unidad_medida_id = u.id,
+                        impuesto_id = i.id,
+                        marca_id = m.id,
+                        clase = a.clase,
+                        nombre_completo = a.nombre_completo,
+                        nombre_corto = a.nombre_corto,
+                        descripcion = a.descripcion,
+                        foto = a.foto,
+                        nombre_foto = a.nombre_foto,
+                        fecha_creacion = a.fecha_creacion,
+                        control_stock = a.control_stock,
+                        stock_minimo = a.stock_minimo,
+                        stock_actual = a.stock_actual,
+                        precio_compra = a.precio_compra,
+                        precio_venta = a.precio_venta,
+                        nombre_Grupo = g.nombre,
+                        nombre_Medida = u.nombre,
+                        nombre_marca = m.nombre,
+                        nombre_impuesto = i.nombre + " " + i.porcentaje
+
+                    };
+
+                return await articulo.ToListAsync();
+            }
+        }
+
+        //tabla Costos
+        public async Task<List<costo_tarifa>> ObtenerCostos(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var costos = await contexto.costo_tarifa.Where(x => x.id == id).ToListAsync();
+
+                return costos;
+            }
+        }
+
+        public async Task<bool> InsertarCostoc(costo_tarifa costo)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                contexto.costo_tarifa.Add(costo);
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        public async Task<bool> ModificarCosto(costo_tarifa costo)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                var Ucosto = await contexto.costo_tarifa.FirstAsync(x => x.id == costo.id);
+
+                Ucosto.nombre = costo.nombre;
+                Ucosto.desde = costo.desde;
+                Ucosto.es_base = costo.es_base;
+                Ucosto.es_multa = costo.es_multa;
+                Ucosto.hasta = costo.hasta;
+                Ucosto.orden = costo.orden;
+                Ucosto.tarifa_id = costo.tarifa_id;
+                Ucosto.valor = costo.valor;
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
+
+        public async Task<bool> EliminarCosto(int id)
+        {
+            using (var contexto = new ipwebec_hydrosEntities())
+            {
+                IEnumerable<costo_tarifa> costo = contexto.costo_tarifa.Where(b => b.id == id);
+                contexto.costo_tarifa.RemoveRange(costo);
+
+                int affected = await contexto.SaveChangesAsync();
+
+                return (affected == 1);
+            }
+        }
     }
 
     public partial class ConsultaMedidores
@@ -810,8 +1007,34 @@ namespace Modelos
         public int numB { get; set; }
         public int numM { get; set; }
         public int numT { get; set; }
-        public Nullable<System.DateTime> fecha_ingreso { get; set; }
-        public Nullable<System.DateTime> fecha_retiro { get; set; }
+        public DateTime? fecha_ingreso { get; set; }
+        public DateTime? fecha_retiro { get; set; }
         public string NombreMarca { get; set; }
+    }
+
+    public partial class ConsultarArticulos
+    {
+        public int id { get; set; }
+        public int grupo_id { get; set; }
+        public int unidad_medida_id { get; set; }
+        public int impuesto_id { get; set; }
+        public int marca_id { get; set; }
+        public string clase { get; set; }
+        public string nombre_completo { get; set; }
+        public string nombre_corto { get; set; }
+        public string descripcion { get; set; }
+        public byte[] foto { get; set; }
+        public string nombre_foto { get; set; }
+        public Nullable<System.DateTime> fecha_creacion { get; set; }
+        public string control_stock { get; set; }
+        public Nullable<int> stock_minimo { get; set; }
+        public Nullable<int> stock_actual { get; set; }
+        public Nullable<decimal> precio_compra { get; set; }
+        public Nullable<decimal> precio_venta { get; set; }
+        public string nombre_Grupo { get; set; }
+        public string nombre_Medida { get; set; }
+        public string nombre_impuesto { get; set; }
+        public string nombre_marca { get; set; }
+
     }
 }

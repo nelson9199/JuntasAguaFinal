@@ -253,19 +253,19 @@ namespace JutasAgua.Ventanas
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (dropMarca.SelectedItem?.ToString() == "Seleccione...")
+            if (dropMarca.Text == "SELECCIONE...")
             {
                 errorProvider1.SetError(dropMarca, "Debe seleccionar una Marca");
             }
-            if (dropTarifa.SelectedItem?.ToString() == "Seleccione...")
+            if (dropTarifa.Text == "SELECCIONE...")
             {
                 errorProvider1.SetError(dropTarifa, "Debe seleccionar una Tarifa");
             }
-            if (dropBarrio.SelectedItem?.ToString() == "Seleccione...")
+            if (dropBarrio.Text == "SELECCIONE...")
             {
                 errorProvider1.SetError(dropBarrio, "Debe seleccionar un Barrio");
             }
-            if (dropMarca.SelectedItem?.ToString() == "Seleccione..." || dropTarifa.SelectedItem?.ToString() == "Seleccione..." || dropBarrio.SelectedItem?.ToString() == "Seleccione...")
+            if (dropMarca.Text == "SELECCIONE..." || dropTarifa.Text == "SELECCIONE..." || dropBarrio.Text == "SELECCIONE...")
             {
                 return;
             }

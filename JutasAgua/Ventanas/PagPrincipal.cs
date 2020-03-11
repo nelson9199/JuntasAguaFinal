@@ -22,6 +22,7 @@ namespace JutasAgua.Ventanas
         Gurpo gurpo = null;
         Impuesto impuesto = null;
         Unidades_Medida medida = null;
+        private Articulos articulos = null;
 
         public PagPrincipal()
         {
@@ -256,6 +257,28 @@ namespace JutasAgua.Ventanas
         private void CerrarFormaMedida(object sender, FormClosedEventArgs e)
         {
             medida = null;
+        }
+
+        //abrir form articulos
+        private void articulosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (articulos == null)
+            {
+                articulos = new Articulos();
+                articulos.MdiParent = this;
+                articulos.FormClosed += new FormClosedEventHandler(CerrarFormaArticulos);
+                articulos.Show();
+                articulos.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                articulos.Activate();
+            }
+        }
+
+        private void CerrarFormaArticulos(object sender, FormClosedEventArgs e)
+        {
+            articulos = null;
         }
     }
 }

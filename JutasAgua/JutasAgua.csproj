@@ -61,6 +61,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Bunifu.UI.WinForms.BunifuLabel.dll</HintPath>
     </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuPictureBox, Version=1.11.5.1, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Bunifu.UI.WinForms.BunifuPictureBox.dll</HintPath>
+    </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuSlider, Version=1.11.5.1, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Bunifu.UI.WinForms.BunifuSlider.dll</HintPath>
@@ -117,6 +121,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ventanas\Articulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventanas\Articulos.Designer.cs">
+      <DependentUpon>Articulos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventanas\Barrio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +138,12 @@
     </Compile>
     <Compile Include="Ventanas\Clientes.Designer.cs">
       <DependentUpon>Clientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\Costp_Ta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventanas\Costp_Ta.Designer.cs">
+      <DependentUpon>Costp_Ta.cs</DependentUpon>
     </Compile>
     <Compile Include="Ventanas\Empresas.cs">
       <SubType>Form</SubType>
@@ -197,11 +213,17 @@
     <Compile Include="Ventanas\Usuarios.Designer.cs">
       <DependentUpon>Usuarios.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Ventanas\Articulos.resx">
+      <DependentUpon>Articulos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ventanas\Barrio.resx">
       <DependentUpon>Barrio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventanas\Clientes.resx">
       <DependentUpon>Clientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventanas\Costp_Ta.resx">
+      <DependentUpon>Costp_Ta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventanas\Empresas.resx">
       <DependentUpon>Empresas.cs</DependentUpon>
@@ -264,7 +286,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Modelos\Modelos.csproj">
-      <Project>{a5dd8f15-256f-47f2-b91a-b318e007dbd1}</Project>
+      <Project>{A5DD8F15-256F-47F2-B91A-B318E007DBD1}</Project>
       <Name>Modelos</Name>
     </ProjectReference>
   </ItemGroup>
